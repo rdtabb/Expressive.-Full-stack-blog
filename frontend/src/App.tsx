@@ -4,7 +4,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import LoginRegister from './components/LoginRegister/LoginRegister'
 
 const App = () => {
-  const { isAuth, setIsAuth } = useLoginRegister()
+  const { isAuth } = useLoginRegister()
 
 
   if (!isAuth) {
@@ -17,7 +17,7 @@ const App = () => {
 
   return (
     <div className="app">
-
+      <h1>You are authorized!</h1>
     </div>
   )
 }

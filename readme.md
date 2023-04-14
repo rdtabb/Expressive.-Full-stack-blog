@@ -11,8 +11,7 @@ Expressive is a full-stack application which has user authentication and authori
     - ReactJS
     - SCSS
     - Typescript
-    - Redux toolkit
-    - RTK Query 
+    - Axios
 2. Backend:
     - NodeJS
     - Express

@@ -52,10 +52,23 @@ const db = mysql.createConnection({
 // Endpoints
 // ------------------------------------
 
+app.get('/getusers', (req, res) => {
+    db.query(
+        'SELECT * FROM users',
+        (err, result) => {
+            if (err) {
+                console.error(err)
+            } else {
+                res.send(result)
+            }
+        }
+    )
+})
+
 // ...
 // register POST
 app.post('/register', (req, res) => {
-    const nameReg = req.body.usernameReg
+    const nameReg = req.body.nameReg
     const passwordReg = req.body.passwordReg
 
     crypt.hash(passwordReg, saltrounds,
@@ -92,7 +105,7 @@ app.post('/login', (req, res) => {
                 res.send({err})
             }
 
-            if (result.lenght > 0) {
+            if (result.length > 0) {
                 crypt.compare(password, result[0].password),
                 (err, resp) => {
                     if (resp) {

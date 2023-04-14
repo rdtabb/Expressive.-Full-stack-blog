@@ -1,5 +1,7 @@
-import { useState } from "react";
-import { handleRegister } from "../../axios/axios";
+import { useEffect, useState } from "react";
+import useLoginRegister from "../../hooks/useLoginRegister";
+import axios from "axios";
+import { BASE_URL } from "../../axios/axios";
 
 const LoginRegister = () => {
   const [loginName, setLoginName] = useState<string>("")
@@ -7,6 +9,14 @@ const LoginRegister = () => {
 
   const [regName, setRegName] = useState<string>("")
   const [regPass, setRegPass] = useState<string>("")
+
+  const { handleLogin, handleRegister } = useLoginRegister()
+
+  useEffect(() => {
+    axios.get(`${BASE_URL}/getusers`).then((result) => {
+      console.log(result)
+    })
+  }, [])
 
   return (
     <div className="loginreg">
@@ -25,7 +35,10 @@ const LoginRegister = () => {
             value={regPass}
             onChange={(e) => setRegPass(e.target.value)}
           />
-          <button onClick={() => handleRegister(regName, regPass, setRegName, setRegPass)}>Register</button>
+          <button
+            onClick={() => handleRegister(regName, regPass, setRegName,
+              setRegPass)}
+          >Register</button>
         </form>
       </section>
 
@@ -44,7 +57,9 @@ const LoginRegister = () => {
             value={loginPass}
             onChange={(e) => setLoginPass(e.target.value)}
           />
-          <button>Login</button>
+          <button
+            onClick={() => handleLogin(loginName, loginPass, setLoginName, setLoginPass)}
+          >Login</button>
         </form>
       </section>
     </div>
