@@ -16,7 +16,6 @@ const session = require('express-session')
 // ------------------------------------
 
 const app = express()
-
 app.use(cors({
     origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "DELETE"],
@@ -98,7 +97,7 @@ app.post('/login', (req, res) => {
     const password = req.body.passwordLog
 
     db.query(
-        'SELECT * FROM users WHERE username = ?',
+        'SELECT * FROM users WHERE username = ?;',
         name,
         (err, result) => {
             if (err) {
@@ -106,20 +105,21 @@ app.post('/login', (req, res) => {
             }
 
             if (result.length > 0) {
-                crypt.compare(password, result[0].password),
-                (err, resp) => {
-                    if (resp) {
-                        req.session.user = result
-                        res.send(result)
-                    } else {
-                        res.send({
-                            message: 'User does not exist'
-                        })
+                crypt.compare(password, result[0].password,
+                    (err, resp) => {
+                        if (resp) {
+                            req.session.user = result
+                            res.send(result)
+                        } else {
+                            res.send({
+                                message: "Wrond password/username"
+                            })
+                        }
                     }
-                }
+                )
             } else {
                 res.send({
-                    message: 'User does not exist'
+                    message: "User does not exist"
                 })
             }
         }
