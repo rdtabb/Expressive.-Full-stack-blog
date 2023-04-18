@@ -77,7 +77,6 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     axios.get(`${BASE_URL}/login`).then((response) => {
-      console.log(response)
       if (response.data.auth == true) {
         setIsAuth(true)
       }

@@ -1,5 +1,6 @@
 import useLoginRegister from './hooks/useLoginRegister'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
+import { ProfileContextProvider } from './context/ProfileContext'
 import LoginRegister from './components/LoginRegister/LoginRegister'
 import Profile from './components/Profile/Profile'
 import { Route, Routes } from 'react-router-dom'
@@ -26,9 +27,11 @@ const App = () => {
   }
 
   return (
-    <Routes>
-      <Route path='/' element={<Profile />}/>
-    </Routes>
+    <ProfileContextProvider>
+      <Routes>
+        <Route path='/' element={<Profile />}/>
+      </Routes>
+    </ProfileContextProvider>
   )
 }
 

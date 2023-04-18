@@ -51,6 +51,26 @@ const db = mysql.createConnection({
 // Endpoints
 // ------------------------------------
 
+// ...
+// logout DELETE
+app.delete('/logout', (req, res) => {
+    if (req.session) {
+        req.session.destroy(err => {
+            if (err) {
+                res.send({
+                    message: "Unable to logout"
+                })
+            } else {
+                res.send({
+                    message: "Successful logout"
+                })
+            }
+        })
+    }
+})
+
+// ...
+// getusers GET
 app.get('/getusers', (req, res) => {
     db.query(
         'SELECT * FROM users',
