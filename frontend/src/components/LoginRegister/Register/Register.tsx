@@ -27,6 +27,7 @@ const Register = () => {
                     onChange={(e) => setRegPass(e.target.value)}
                 />
                 <button
+                    type="button"
                     onClick={handleRegister}
                 >Register</button>
             </form>

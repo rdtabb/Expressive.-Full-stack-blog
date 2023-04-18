@@ -27,6 +27,7 @@ const Login = () => {
                     onChange={(e) => setLoginPass(e.target.value)}
                 />
                 <button
+                    type="button"
                     onClick={handleLogin}
                 >Login</button>
             </form>

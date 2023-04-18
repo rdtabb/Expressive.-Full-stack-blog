@@ -49,11 +49,27 @@
   gap: var(--padding);
   width: min(var(--width), 100% - var(--padding));
   margin-inline: auto;
+  padding: clamp(1rem, 3vw, 2rem);
   place-self: center;
+
+  background-color: hsl(var(--clr-white), .05);
+  backdrop-filter: blur(10rem);
+  border-radius: var(--rad-400);
 
   h2 {
     font-size: var(--fs-600);
     font-weight: var(--fw-600);
+  }
+
+  &__redirect {
+    text-decoration: none;
+    color: inherit;
+    opacity: .6;
+    transition: all var(--tr-time) var(--tr-func);
+
+    &:hover {
+      opacity: 1;
+    }
   }
 }
 

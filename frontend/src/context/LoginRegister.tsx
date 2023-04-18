@@ -1,4 +1,5 @@
 import { createContext, ReactElement, useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
 
@@ -46,6 +47,8 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
   const [regName, setRegName] = useState<string>("")
   const [regPass, setRegPass] = useState<string>("")
 
+  const navigate = useNavigate()
+
   const handleRegister = async () => {
     axios.post(`${BASE_URL}/register`, {
       nameReg: regName,
@@ -53,6 +56,8 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
     });
     setRegName("");
     setRegPass("");
+
+    navigate("/login")
   };
 
   const handleLogin = () => {
@@ -66,6 +71,8 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
       });
     setLoginName("");
     setLoginPass("");
+
+    navigate("/")
   };
 
   useEffect(() => {
