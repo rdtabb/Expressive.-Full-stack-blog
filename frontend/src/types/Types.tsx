@@ -6,5 +6,6 @@ export type PostType = {
 }
 
 export type UserType = {
-    username: string
+    user_id: number | null,
+    username: string | null
 }

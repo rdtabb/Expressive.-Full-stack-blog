@@ -1,11 +1,11 @@
 import useProfileContext from "../../hooks/useProfileContext"
 
 const Profile = () => {
-  const { handleLogOut } = useProfileContext()
+  const { handleLogOut, user } = useProfileContext()
 
   return (
     <div className="profile">
-      <h1>Hello!</h1>
+      <h1>Hello, {user.username}</h1>
       <button
         type="button"
         onClick={handleLogOut}
