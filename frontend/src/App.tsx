@@ -1,11 +1,22 @@
-import { useState } from 'react'
 import useLoginRegister from './hooks/useLoginRegister'
 import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import LoginRegister from './components/LoginRegister/LoginRegister'
+import Profile from './components/Profile/Profile'
+import { Route, Routes, useNavigate } from 'react-router-dom'
+
+import { useEffect } from 'react'
+import axios from 'axios'
+import { BASE_URL } from './axios/axios'
 
 const App = () => {
   const { isAuth } = useLoginRegister()
+  const navigate = useNavigate()
 
+  useEffect(() => {
+    axios.get(`${BASE_URL}/getusers`).then((result) => {
+      console.log(result)
+    })
+  }, [])
 
   if (!isAuth) {
     return (
@@ -16,9 +27,9 @@ const App = () => {
   }
 
   return (
-    <div className="app">
-      <h1>You are authorized!</h1>
-    </div>
+    <Routes>
+      <Route path='/' element={<Profile />}/>
+    </Routes>
   )
 }
 

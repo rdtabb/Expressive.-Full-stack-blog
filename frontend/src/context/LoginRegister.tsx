@@ -5,8 +5,16 @@ import axios from "axios";
 type LoginRegister = {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
-  handleLogin: (nameLog: string, passwordLog: string, setLoginName: React.Dispatch<React.SetStateAction<string>>, setLoginPass: React.Dispatch<React.SetStateAction<string>>) => void;
-  handleRegister: (nameReg: string, passwordReg: string, setRegName: React.Dispatch<React.SetStateAction<string>>, setRegPass: React.Dispatch<React.SetStateAction<string>>) => Promise<void>
+  handleLogin: () => void;
+  handleRegister: () => Promise<void>,
+  loginName: string,
+  loginPass: string,
+  regName: string,
+  regPass: string,
+  setLoginName: React.Dispatch<React.SetStateAction<string>>,
+  setLoginPass: React.Dispatch<React.SetStateAction<string>>,
+  setRegName: React.Dispatch<React.SetStateAction<string>>,
+  setRegPass: React.Dispatch<React.SetStateAction<string>>,
 };
 
 const initState: LoginRegister = {
@@ -14,6 +22,14 @@ const initState: LoginRegister = {
   setIsAuth: () => {},
   handleLogin: async () => {},
   handleRegister: async () => {},
+  loginName: "",
+  loginPass: "",
+  regName: "",
+  regPass: "",
+  setLoginName: () => {},
+  setLoginPass: () => {},
+  setRegName: () => {},
+  setRegPass: () => {},
 };
 
 export const LoginRegisterContext = createContext<LoginRegister>(initState);
@@ -24,31 +40,26 @@ type ChildrenType = {
 
 export const LoginRegisterProvider = ({ children }: ChildrenType) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);
+  const [loginName, setLoginName] = useState<string>("")
+  const [loginPass, setLoginPass] = useState<string>("")
 
-  const handleRegister = async (
-    nameReg: string,
-    passwordReg: string,
-    setRegName: React.Dispatch<React.SetStateAction<string>>,
-    setRegPass: React.Dispatch<React.SetStateAction<string>>
-  ) => {
+  const [regName, setRegName] = useState<string>("")
+  const [regPass, setRegPass] = useState<string>("")
+
+  const handleRegister = async () => {
     axios.post(`${BASE_URL}/register`, {
-      nameReg,
-      passwordReg,
+      nameReg: regName,
+      passwordReg: regPass,
     });
     setRegName("");
     setRegPass("");
   };
 
-  const handleLogin = (
-    usernameLog: string,
-    passwordLog: string,
-    setLoginName: React.Dispatch<React.SetStateAction<string>>,
-    setLoginPass: React.Dispatch<React.SetStateAction<string>>
-  ) => {
+  const handleLogin = () => {
     axios
       .post(`${BASE_URL}/login`, {
-        usernameLog,
-        passwordLog,
+        usernameLog: loginName,
+        passwordLog: loginPass,
       })
       .then((response) => {
         console.log(response);
@@ -59,7 +70,7 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
 
   useEffect(() => {
     axios.get(`${BASE_URL}/login`).then((response) => {
-        console.log(response)
+      console.log(response)
       if (response.data.auth == true) {
         setIsAuth(true)
       }
@@ -72,7 +83,15 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
         isAuth,
         setIsAuth,
         handleLogin,
-        handleRegister
+        handleRegister,
+        loginName,
+        loginPass,
+        regName,
+        regPass,
+        setLoginName,
+        setLoginPass,
+        setRegName,
+        setRegPass,
       }}
     >
       {children}
