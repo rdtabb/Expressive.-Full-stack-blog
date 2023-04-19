@@ -52,6 +52,26 @@ const db = mysql.createConnection({
 // ------------------------------------
 
 // ...
+// getposts GET
+app.get('/userposts', (req, res) => {
+    const id = req.session.user[0].id
+
+    db.query(
+        'SELECT * FROM posts WHERE user_id = ?',
+        id,
+        (err, result) => {
+            if (err) {
+                res.send({
+                    err
+                })
+            } else {
+                res.send(result)
+            }
+        }
+    )
+})
+
+// ...
 // logout DELETE
 app.delete('/logout', (req, res) => {
     if (req.session) {
