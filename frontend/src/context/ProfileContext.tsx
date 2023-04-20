@@ -1,25 +1,25 @@
 import { createContext, ReactElement, useEffect, useCallback, useState } from "react";
 import useLoginRegister from "../hooks/useLoginRegister";
-import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
-import type { UserType } from "../types/Types";
-import type { PostType } from "../types/Types";
-import { useQuery, useMutation } from "@tanstack/react-query";
+import type { UserType, PostType } from "../types/Types";
+import { useQuery, useMutation, UseQueryResult } from "@tanstack/react-query";
 
 
 type ProfileContext = {
     handleLogOut: () => Promise<void>,
     user: UserType,
     userPosts: PostType[],
-    setUserPosts: React.Dispatch<React.SetStateAction<PostType[]>>
+    setUserPosts: React.Dispatch<React.SetStateAction<PostType[]>>,
+    postsQuery: any
 }
 
 const initState: ProfileContext = {
     handleLogOut: async () => {},
     user: {username: null, user_id: null},
     userPosts: [],
-    setUserPosts: () => {}
+    setUserPosts: () => {},
+    postsQuery: () => {}
 }
 
 export const ProfileContext = createContext<ProfileContext>(initState)
@@ -32,11 +32,20 @@ export const ProfileContextProvider = ({children}: ChildrenType) => {
     const [user, setUser] = useState<UserType>({username: null,user_id: null})
     const [userPosts, setUserPosts] = useState<PostType[]>([])
     const { setIsAuth, isAuth } = useLoginRegister()
-    const navigate = useNavigate()
- 
+
+    const handleGetPosts = async () => {
+        const result = await axios.get(`${BASE_URL}/userposts`)
+        const postsData: PostType[] = result.data
+        return postsData
+    }
+
+    const postsQuery = useQuery({
+        queryKey: ["posts"],
+        queryFn: handleGetPosts
+    })
+
     const handleLogOut = async () => {
         await axios.delete(`${BASE_URL}/logout`)
-        navigate('/login')
         setIsAuth(false)
     }
 
@@ -46,21 +55,12 @@ export const ProfileContextProvider = ({children}: ChildrenType) => {
         setUser(userData)
     }, [])
 
-    const handleGetPosts = async () => {
-        const result = await axios.get(`${BASE_URL}/userposts`)
-        console.log(result)
-    }
-
-    useEffect(() => {
-        handleGetPosts()
-    }, [])
-
     useEffect(() => {
         handleGetUserData()
     }, [isAuth])
 
     return (
-        <ProfileContext.Provider value={{ handleLogOut, user, userPosts, setUserPosts }}>
+        <ProfileContext.Provider value={{ handleLogOut, user, userPosts, setUserPosts, postsQuery }}>
             {children}
         </ProfileContext.Provider>
     )

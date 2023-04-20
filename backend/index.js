@@ -55,13 +55,9 @@ const db = mysql.createConnection({
 // getposts GET
 app.get('/userposts', (req, res) => {
     const id = req.session.user[0].user_id
-    console.log('-------------------------------')
-    console.log('-------------------------------')
-    console.log('-------------------------------')
-    console.log(req.session.user[0])
-    console.log(req.session.user[0].user_id)
+
     db.query(
-        'SELECT * FROM posts WHERE user_id = ?;',
+        'SELECT * FROM posts WHERE user_id = 1;',
         id,
         (err, result) => {
             if (err) {

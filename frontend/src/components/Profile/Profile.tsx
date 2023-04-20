@@ -1,4 +1,5 @@
 import useProfileContext from "../../hooks/useProfileContext"
+import Feed from "./Feed/Feed"
 
 const Profile = () => {
   const { handleLogOut, user } = useProfileContext()
@@ -10,6 +11,7 @@ const Profile = () => {
         type="button"
         onClick={handleLogOut}
       >LogOut</button>
+      <Feed />
     </div>
   )
 }
