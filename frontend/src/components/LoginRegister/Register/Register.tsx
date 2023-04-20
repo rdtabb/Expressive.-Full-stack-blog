@@ -31,7 +31,7 @@ const Register = () => {
                     onClick={handleRegister}
                 >Register</button>
             </form>
-            <Link className="loginreg__redirect" to="/login">Login if you have an account</Link>
+            <Link className="loginreg__redirect" to="/">Login if you have an account</Link>
         </section>
     )
 }

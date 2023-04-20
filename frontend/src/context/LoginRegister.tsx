@@ -71,6 +71,7 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
       });
     setLoginName("");
     setLoginPass("");
+    setIsAuth(true)
 
     navigate("/")
   };

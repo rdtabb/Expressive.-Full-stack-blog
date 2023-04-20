@@ -46,8 +46,13 @@ export const ProfileContextProvider = ({children}: ChildrenType) => {
         setUser(userData)
     }, [])
 
-    const handleGetPosts = useCallback(async () => {
+    const handleGetPosts = async () => {
         const result = await axios.get(`${BASE_URL}/userposts`)
+        console.log(result)
+    }
+
+    useEffect(() => {
+        handleGetPosts()
     }, [])
 
     useEffect(() => {
