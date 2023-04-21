@@ -18,9 +18,6 @@ const Nav = () => {
           <li className="list-item">
             <Link className="nav__link" to="/post">New Post</Link>
           </li>
-          <li className="list-item">
-            <Link className="nav__link" to="/about">About</Link>
-          </li>
         </ul>
     </nav>
   )

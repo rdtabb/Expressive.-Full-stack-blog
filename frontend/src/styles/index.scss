@@ -340,6 +340,37 @@ body #root {
 }
 
 /* ----------------------------- */
+/* posts                         */
+/* ----------------------------- */
+
+.posts {
+  display: grid;
+  gap: 1rem;
+
+  &--empty {
+    animation: pulse 4s infinite ease;
+  }
+}
+
+@keyframes pulse {
+  0% {
+    opacity: 1;
+  }
+  25% {
+    opacity: .6;
+  }
+  50% {
+    opacity: 1;
+  }
+  75% {
+    opacity: .6;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+/* ----------------------------- */
 /* Home component                */
 /* ----------------------------- */
 
@@ -370,6 +401,12 @@ body #root {
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(1.5rem);
   border-radius: .4rem;
+
+  &--empty {
+    height: 14rem;
+    width: 100%;
+    background: rgba(255, 255, 255, 0.3);
+  }
 
   &__heading {
     display: flex;

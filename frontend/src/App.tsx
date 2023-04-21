@@ -19,7 +19,7 @@ const App = () => {
   return (
     <ProfileContextProvider>
       <Routes>
-        <Route path='/' element={<Profile />}/>
+        <Route path='*' element={<Profile />}/>
       </Routes>
     </ProfileContextProvider>
   )

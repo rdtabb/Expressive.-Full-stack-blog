@@ -1,6 +1,7 @@
 import useProfileContext from "../../../hooks/useProfileContext"
 import type { PostType } from "../../../types/Types"
 import { useQuery } from "@tanstack/react-query"
+import LoadingPosts from "../../LoadingFillers/LoadingPosts"
 
 const Feed = () => {
   const { handleGetPosts } = useProfileContext()
@@ -10,7 +11,7 @@ const Feed = () => {
     queryFn: handleGetPosts
   })
 
-  if (postsQuery.isLoading) return <h1>Loading...</h1>
+  if (postsQuery.isLoading) return <LoadingPosts />
   if (postsQuery.isError) return <pre>{JSON.stringify(postsQuery.error)}</pre>
 
   return (
