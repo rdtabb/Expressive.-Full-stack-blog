@@ -11,7 +11,7 @@ type ProfileContext = {
     user: UserType,
     userPosts: PostType[],
     setUserPosts: React.Dispatch<React.SetStateAction<PostType[]>>,
-    postsQuery: any
+    handleGetPosts: () => Promise<any>,
 }
 
 const initState: ProfileContext = {
@@ -19,7 +19,7 @@ const initState: ProfileContext = {
     user: {username: null, user_id: null},
     userPosts: [],
     setUserPosts: () => {},
-    postsQuery: () => {}
+    handleGetPosts: async () => {},
 }
 
 export const ProfileContext = createContext<ProfileContext>(initState)
@@ -35,14 +35,9 @@ export const ProfileContextProvider = ({children}: ChildrenType) => {
 
     const handleGetPosts = async () => {
         const result = await axios.get(`${BASE_URL}/userposts`)
-        const postsData: PostType[] = result.data
+        const postsData = result.data
         return postsData
     }
-
-    const postsQuery = useQuery({
-        queryKey: ["posts"],
-        queryFn: handleGetPosts
-    })
 
     const handleLogOut = async () => {
         await axios.delete(`${BASE_URL}/logout`)
@@ -60,7 +55,7 @@ export const ProfileContextProvider = ({children}: ChildrenType) => {
     }, [isAuth])
 
     return (
-        <ProfileContext.Provider value={{ handleLogOut, user, userPosts, setUserPosts, postsQuery }}>
+        <ProfileContext.Provider value={{ handleLogOut, user, userPosts, setUserPosts, handleGetPosts }}>
             {children}
         </ProfileContext.Provider>
     )

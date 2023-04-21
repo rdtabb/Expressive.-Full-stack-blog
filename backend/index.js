@@ -57,7 +57,7 @@ app.get('/userposts', (req, res) => {
     const id = req.session.user[0].user_id
 
     db.query(
-        'SELECT * FROM posts WHERE user_id = 1;',
+        'SELECT * FROM posts WHERE user_id = ?;',
         id,
         (err, result) => {
             if (err) {
