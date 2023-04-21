@@ -1,5 +1,5 @@
 # Expressive. Full-stack blog application
-Expressive is a full-stack application which has user authentication and authorization and blog functionality. 
+Expressive is a full-stack application which has user authentication and authorization and blog functionality. App created using MERN stack 
 
 ## Functionality
  - Create account

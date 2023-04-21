@@ -3,7 +3,7 @@ import useLoginRegister from "../hooks/useLoginRegister";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
 import type { UserType, PostType } from "../types/Types";
-import { useQuery, useMutation, UseQueryResult } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 
 type ProfileContext = {
@@ -12,14 +12,24 @@ type ProfileContext = {
     userPosts: PostType[],
     setUserPosts: React.Dispatch<React.SetStateAction<PostType[]>>,
     handleGetPosts: () => Promise<any>,
+    title: string,
+    content: string,
+    setTitle: React.Dispatch<React.SetStateAction<string>>,
+    setContent: React.Dispatch<React.SetStateAction<string>>,
+    handleNewPost: () => Promise<void>
 }
 
 const initState: ProfileContext = {
     handleLogOut: async () => {},
+    handleNewPost: async () => {},
     user: {username: null, user_id: null},
     userPosts: [],
     setUserPosts: () => {},
     handleGetPosts: async () => {},
+    title: "",
+    content: "",
+    setContent: () => {},
+    setTitle: () => {},
 }
 
 export const ProfileContext = createContext<ProfileContext>(initState)
@@ -31,12 +41,23 @@ type ChildrenType = {
 export const ProfileContextProvider = ({children}: ChildrenType) => {
     const [user, setUser] = useState<UserType>({username: null,user_id: null})
     const [userPosts, setUserPosts] = useState<PostType[]>([])
+    const [title, setTitle] = useState<string>("")
+    const [content, setContent] = useState<string>("")
     const { setIsAuth, isAuth } = useLoginRegister()
+    const navigate = useNavigate()
 
     const handleGetPosts = async () => {
         const result = await axios.get(`${BASE_URL}/userposts`)
         const postsData = result.data
         return postsData
+    }
+
+    const handleNewPost = async () => {
+        await axios.post(`${BASE_URL}/addpost`, {
+            title,
+            content
+        })
+        navigate("/")
     }
 
     const handleLogOut = async () => {
@@ -55,7 +76,18 @@ export const ProfileContextProvider = ({children}: ChildrenType) => {
     }, [isAuth])
 
     return (
-        <ProfileContext.Provider value={{ handleLogOut, user, userPosts, setUserPosts, handleGetPosts }}>
+        <ProfileContext.Provider value={{ 
+            handleLogOut, 
+            user, 
+            userPosts, 
+            setUserPosts, 
+            handleGetPosts,
+            title,
+            content,
+            setTitle,
+            setContent,
+            handleNewPost
+        }}>
             {children}
         </ProfileContext.Provider>
     )
