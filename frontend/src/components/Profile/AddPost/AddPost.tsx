@@ -1,9 +1,18 @@
 import useProfileContext from "../../../hooks/useProfileContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewPost = () => {
+  const queryCLient = useQueryClient()
   const { 
     title, content, setTitle, setContent, handleNewPost 
   } = useProfileContext();
+
+  const feedMutation = useMutation({
+    mutationFn: handleNewPost,
+    onSuccess: () => {
+      queryCLient.invalidateQueries(["posts"])
+    }
+  })
 
   return (
     <main className="new-post">
@@ -33,7 +42,8 @@ const NewPost = () => {
             onChange={(e) => setContent(e.target.value)}
           />
           <button
-            onClick={handleNewPost}
+            disabled={feedMutation.isLoading}
+            onClick={() => feedMutation.mutate()}
             className="new-post__submit"
             type="submit"
           >

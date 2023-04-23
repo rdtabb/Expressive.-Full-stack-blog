@@ -18,7 +18,7 @@ const session = require("express-session");
 const app = express();
 app.use(
   cors({
-    origin: [import.meta.env.VITE_URL],
+    origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "DELETE"],
     credentials: true,
   })
@@ -33,7 +33,7 @@ app.use(
 app.use(
   session({
     key: "userId",
-    secret: import.meta.env.VITE_SECRET,
+    secret: 'secret',
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -49,8 +49,8 @@ app.use(
 const db = mysql.createConnection({
   user: "root",
   host: "localhost",
-  password: import.meta.env.VITE_DBPASS,
-  database: import.meta.env.VITE_DB,
+  password: "Qwertyader54321",
+  database: "ExpressiveDB",
 });
 
 // ------------------------------------

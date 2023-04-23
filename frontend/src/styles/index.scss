@@ -508,6 +508,18 @@ body #root {
     color: hsl(var(--clr-white));
     border: 1px solid var(--clr-bright-accent);
     border-radius: .75rem;
+    transition: all var(--tr-time) var(--tr-func);
+    
+    &:focus,
+    &:focus-visible {
+      outline: none;
+      border: 1px solid hsl(var(--clr-white));
+    }
+
+    &:hover {
+      border: 1px solid hsl(var(--clr-white, .8));
+    }
+
   }
 
   &__heading {
