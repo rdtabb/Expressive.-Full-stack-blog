@@ -62,7 +62,7 @@ const db = mysql.createConnection({
 app.get("/userposts", (req, res) => {
   const id = req.session.user[0].user_id;
 
-  db.query("SELECT * FROM posts WHERE user_id = ?;", id, (err, result) => {
+  db.query("SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC;", id, (err, result) => {
     if (err) {
       res.send({
         error: err,
