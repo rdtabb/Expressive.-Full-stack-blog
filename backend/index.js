@@ -19,7 +19,7 @@ const app = express();
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-    methods: ["GET", "POST", "DELETE"],
+    methods: ["GET", "POST", "DELETE", "PUT"],
     credentials: true,
   })
 );
@@ -58,6 +58,28 @@ const db = mysql.createConnection({
 // ------------------------------------
 
 // ...
+// updatepost PUT
+app.put(`/updatepost/:id`, (req, res) => {
+  const id = req.params.id
+  const title = req.body.title
+  const content = req.body.content
+
+  db.query(
+    'UPDATE posts SET title = ?, content = ? WHERE id = ?',
+    [title, content, id],
+    (err, result) => {
+      if (err) {
+        res.send({
+          err
+        })
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
+// ...
 // getposts GET
 app.get("/userposts", (req, res) => {
   const id = req.session.user[0].user_id;
@@ -66,7 +88,6 @@ app.get("/userposts", (req, res) => {
     if (err) {
       res.send({
         error: err,
-        id: id,
       });
     } else {
       res.send(result);

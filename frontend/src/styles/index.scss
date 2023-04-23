@@ -438,6 +438,12 @@ body #root {
 /* Post page                     */
 /* ----------------------------- */
 
+.redirects {
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+}
+
 .post-page {
   margin-block: clamp(1rem, 5vw, 2rem);
 }
@@ -509,7 +515,7 @@ body #root {
     border: 1px solid var(--clr-bright-accent);
     border-radius: .75rem;
     transition: all var(--tr-time) var(--tr-func);
-    
+
     &:focus,
     &:focus-visible {
       outline: none;

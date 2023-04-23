@@ -4,6 +4,8 @@ import Header from "./Header/Header"
 import Nav from "./Nav/Nav"
 import Feed from "./Feed/Feed"
 import AddPost from "./AddPost/AddPost"
+import PostPage from "./PostPage/PostPage"
+import EditPost from "./PostPage/PostPage"
 
 const Profile = () => {
   return (
@@ -14,6 +16,8 @@ const Profile = () => {
         <Routes>
           <Route path="/" element={<Feed />} />
           <Route path="/post" element={<AddPost />} />
+          <Route path="/post/:id" element={<PostPage />} />
+          <Route path="/post/:id/edit" element={<EditPost />} />
         </Routes>
       </ErrorBoundary>
     </div>
