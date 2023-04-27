@@ -7,7 +7,7 @@ import AddPost from "./AddPost/AddPost"
 import PostPage from "./PostPage/PostPage"
 import EditPost from "./PostPage/PostPage"
 
-const Profile = () => {
+const Profile = () => { 
   return (
     <div className="container">
       <Header />
@@ -17,7 +17,7 @@ const Profile = () => {
           <Route path="/" element={<Feed />} />
           <Route path="/post" element={<AddPost />} />
           <Route path="/post/:id" element={<PostPage />} />
-          <Route path="/post/:id/edit" element={<EditPost />} />
+          <Route path="/post/edit/:id" element={<EditPost />} />
         </Routes>
       </ErrorBoundary>
     </div>

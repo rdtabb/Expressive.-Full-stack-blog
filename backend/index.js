@@ -58,6 +58,27 @@ const db = mysql.createConnection({
 // ------------------------------------
 
 // ...
+// deletepost DELETE
+app.delete(`delete/:id`, (req, res) => {
+  const id = req.params.id
+
+  db.query(
+    'DELETE FROM posts WHERE post_id = ?',
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({
+          err
+        })
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
+
+// ...
 // updatepost PUT
 app.put(`/updatepost/:id`, (req, res) => {
   const id = req.params.id
@@ -65,7 +86,7 @@ app.put(`/updatepost/:id`, (req, res) => {
   const content = req.body.content
 
   db.query(
-    'UPDATE posts SET title = ?, content = ? WHERE id = ?',
+    'UPDATE posts SET title = ?, content = ? WHERE user_id = ?',
     [title, content, id],
     (err, result) => {
       if (err) {

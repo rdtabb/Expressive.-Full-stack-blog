@@ -38,13 +38,19 @@ type ChildrenType = {
     children?: ReactElement | ReactElement[];
 };
 
-export const ProfileContextProvider = ({children}: ChildrenType) => {
+export const ProfileContextProvider = ({ children }: ChildrenType) => {
     const [user, setUser] = useState<UserType>({username: null,user_id: null})
     const [userPosts, setUserPosts] = useState<PostType[]>([])
     const [title, setTitle] = useState<string>("")
     const [content, setContent] = useState<string>("")
     const { setIsAuth, isAuth } = useLoginRegister()
     const navigate = useNavigate()
+
+    const handleDeletePost = async (id: number) => {
+        const result = await axios.delete(`${BASE_URL}/delete/${id}`)
+        const postData = result.data
+        return postData
+    }
 
     const handleGetPosts = async () => {
         const result = await axios.get(`${BASE_URL}/userposts`)

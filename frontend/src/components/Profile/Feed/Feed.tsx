@@ -11,6 +11,7 @@ const Feed = () => {
     queryKey: ["posts"],
     queryFn: handleGetPosts
   })
+  const posts = postsQuery.data
 
   if (postsQuery.isLoading) return <LoadingPosts />
   if (postsQuery.isError) return <pre>{JSON.stringify(postsQuery.error)}</pre>
@@ -20,7 +21,7 @@ const Feed = () => {
       <ul className="posts">
         {postsQuery.data.map((post: PostType) => (
           <li className="item" key={post.post_id}>
-            <Link className="redirects" state={{ title: post.title, content: post.content }} to={`/post/${post.post_id}`}>
+            <Link className="redirects" state={{ posts }} to={`/post/${post.post_id}`}>
               <div className="item__heading">
                 <h2 className="item__header">{post.title}</h2>
                 <p className="item__date">{post.createdAt}</p>
