@@ -21,13 +21,13 @@ const Feed = () => {
       <ul className="posts">
         {postsQuery.data.map((post: PostType) => (
           <li className="item" key={post.post_id}>
-            <Link className="redirects" state={{ posts }} to={`/post/${post.post_id}`}>
+            <Link className="feed__link" state={{ posts }} to={`/post/${post.post_id}`}>
               <div className="item__heading">
                 <h2 className="item__header">{post.title}</h2>
-                <p className="item__date">{post.createdAt}</p>
+                <p className="item__date">{post.created_at}</p>
               </div>
-              <p>{post.content}</p>
             </Link>
+            <p>{post.content}</p>
           </li>
         ))}
       </ul>

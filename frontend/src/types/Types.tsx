@@ -2,7 +2,7 @@ export type PostType = {
     post_id: number,
     title: string,
     content: string,
-    createdAt: string
+    created_at: string
 }
 
 export type UserType = {

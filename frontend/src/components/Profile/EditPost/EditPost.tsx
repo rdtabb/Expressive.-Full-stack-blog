@@ -1,6 +1,8 @@
 import { useParams, useLocation } from "react-router-dom";
 import type { PostType } from "../../../types/Types";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import useProfileContext from "../../../hooks/useProfileContext";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type StateType = {
   state: {
@@ -9,8 +11,24 @@ type StateType = {
 }
 
 const EditPost = () => {
-  const { id } = useParams();
+  const { id } = useParams()
   const { state }: StateType = useLocation();
+  const queryClient = useQueryClient()
+  const [title, setTitle] = useState<string>("")
+  const [content, setContent] = useState<string>("")
+  const { handleEditPost } = useProfileContext()
+
+  const postMutation = useMutation({
+    mutationFn: handleEditPost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["posts"])
+    }
+  })
+
+  useEffect(() => {
+    setTitle(state.post.title)
+    setContent(state.post.content)
+  }, [])
 
   return (
     <main className="new-post">
@@ -25,7 +43,8 @@ const EditPost = () => {
             className="new-post__title"
             placeholder="Set your title"
             type="text"
-            value={state.post.title}
+            value={title}
+            onChange={(e) => setTitle(e.target.value)}
           />
           <label className="body-label" htmlFor="new-post__body">
             Post
@@ -34,9 +53,18 @@ const EditPost = () => {
             id="new-post__body"
             className="new-post__body edit-post__body"
             placeholder="Text of your post"
-            value={state.post.content}
+            value={content}
+            onChange={(e) => setContent(e.target.value)}
           />
-          <button className="new-post__submit" type="submit">
+          <button 
+            className="new-post__submit" 
+            type="button"
+            onClick={() => postMutation.mutate({
+              id, 
+              title, 
+              content
+            })}
+          >
             Submit new post
           </button>
         </form>

@@ -16,7 +16,8 @@ type ProfileContext = {
     content: string,
     setTitle: React.Dispatch<React.SetStateAction<string>>,
     setContent: React.Dispatch<React.SetStateAction<string>>,
-    handleNewPost: () => Promise<void>
+    handleNewPost: () => Promise<void>,
+    handleEditPost: (variables: VariablesType) => Promise<any>
 }
 
 const initState: ProfileContext = {
@@ -26,6 +27,7 @@ const initState: ProfileContext = {
     userPosts: [],
     setUserPosts: () => {},
     handleGetPosts: async () => {},
+    handleEditPost: async () => {},
     title: "",
     content: "",
     setContent: () => {},
@@ -33,6 +35,12 @@ const initState: ProfileContext = {
 }
 
 export const ProfileContext = createContext<ProfileContext>(initState)
+
+type VariablesType = {
+    id: string | undefined,
+    title: string,
+    content: string
+}
 
 type ChildrenType = {
     children?: ReactElement | ReactElement[];
@@ -47,9 +55,20 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
     const navigate = useNavigate()
 
     const handleDeletePost = async (id: number) => {
-        const result = await axios.delete(`${BASE_URL}/delete/${id}`)
-        const postData = result.data
-        return postData
+        await axios.delete(`${BASE_URL}/delete/${id}`)
+        navigate("/")
+    }
+
+    const handleEditPost = async (variables: VariablesType) => {
+        const title = variables.title
+        const content = variables.content
+
+        const result = await axios.patch(`${BASE_URL}/updatepost/${variables.id}`, {
+            title: title, 
+            content: content
+        })
+        console.log(result)
+        navigate("/")
     }
 
     const handleGetPosts = async () => {
@@ -92,7 +111,8 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
             content,
             setTitle,
             setContent,
-            handleNewPost
+            handleNewPost,
+            handleEditPost
         }}>
             {children}
         </ProfileContext.Provider>

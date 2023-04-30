@@ -19,7 +19,7 @@ const app = express();
 app.use(
   cors({
     origin: ["http://localhost:5173"],
-    methods: ["GET", "POST", "DELETE", "PUT"],
+    methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
     credentials: true,
   })
 );
@@ -80,7 +80,7 @@ app.delete(`delete/:id`, (req, res) => {
 
 // ...
 // updatepost PUT
-app.put(`/updatepost/:id`, (req, res) => {
+app.patch(`/updatepost/:id`, (req, res) => {
   const id = req.params.id
   const title = req.body.title
   const content = req.body.content
