@@ -1,20 +1,22 @@
-import { useParams, useLocation } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import type { PostType } from "../../../types/Types";
+import useProfileContext from "../../../hooks/useProfileContext";
+import { useQuery } from "@tanstack/react-query";
 
-type StateType = {
-  state: {
-    posts: PostType[]
-  }
-}
-
-const EditPost = () => {
+const PostPage = () => {
   const { id } = useParams();
-  const { state }: StateType = useLocation();
+  const { handleGetPosts } = useProfileContext()
 
-  const post = state.posts.find(post => {
-    (post.post_id).toString() === id
+  const postsPageQuery = useQuery({
+    queryKey: ["postsPage"],
+    queryFn: handleGetPosts
   })
+
+  if (postsPageQuery.isLoading) return <p>Loading your post</p>
+  const post: PostType = postsPageQuery.data.find((item: PostType) => (
+    (item.post_id).toString() === id
+  ))
 
   return (
     <main className="new-post">
@@ -24,7 +26,7 @@ const EditPost = () => {
         </div>
         <p>{post?.content}</p>
         <div className="buttons">
-          <Link to={`/post/edit/${id}`}>
+          <Link state={{ post }} to={`/post/edit/${id}`}>
             <button className="post__delete post__edit">Edit Post</button>
           </Link>
           <button className="post__delete">
@@ -36,4 +38,4 @@ const EditPost = () => {
   );
 };
 
-export default EditPost;
+export default PostPage;

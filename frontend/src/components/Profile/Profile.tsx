@@ -5,7 +5,7 @@ import Nav from "./Nav/Nav"
 import Feed from "./Feed/Feed"
 import AddPost from "./AddPost/AddPost"
 import PostPage from "./PostPage/PostPage"
-import EditPost from "./PostPage/PostPage"
+import EditPost from "./EditPost/EditPost"
 
 const Profile = () => { 
   return (
