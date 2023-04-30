@@ -2,11 +2,19 @@ import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import type { PostType } from "../../../types/Types";
 import useProfileContext from "../../../hooks/useProfileContext";
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 
 const PostPage = () => {
   const { id } = useParams();
-  const { handleGetPosts } = useProfileContext()
+  const { handleGetPosts, handleDeletePost } = useProfileContext()
+  const queryClient = useQueryClient()
+
+  const deleteMutation = useMutation({
+    mutationFn: handleDeletePost,
+    onSuccess: () => {
+      queryClient.invalidateQueries(["posts"])
+    }
+  })
 
   const postsPageQuery = useQuery({
     queryKey: ["postsPage"],
@@ -29,9 +37,12 @@ const PostPage = () => {
           <Link state={{ post }} to={`/post/edit/${id}`}>
             <button className="post__delete post__edit">Edit Post</button>
           </Link>
-          <button className="post__delete">
+          <button 
+            onClick={() => deleteMutation.mutate({ id })}
+            className="post__delete"
+          >
             Delete
-          </button>
+          </button> 
         </div>
       </li>
     </main>

@@ -59,7 +59,7 @@ const db = mysql.createConnection({
 
 // ...
 // deletepost DELETE
-app.delete(`delete/:id`, (req, res) => {
+app.delete(`/delete/:id`, (req, res) => {
   const id = req.params.id
 
   db.query(
@@ -86,7 +86,7 @@ app.patch(`/updatepost/:id`, (req, res) => {
   const content = req.body.content
 
   db.query(
-    'UPDATE posts SET title = ?, content = ? WHERE user_id = ?',
+    'UPDATE posts SET title = ?, content = ? WHERE post_id = ?',
     [title, content, id],
     (err, result) => {
       if (err) {

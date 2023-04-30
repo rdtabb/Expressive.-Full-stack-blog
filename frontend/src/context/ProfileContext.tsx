@@ -17,7 +17,8 @@ type ProfileContext = {
     setTitle: React.Dispatch<React.SetStateAction<string>>,
     setContent: React.Dispatch<React.SetStateAction<string>>,
     handleNewPost: () => Promise<void>,
-    handleEditPost: (variables: VariablesType) => Promise<any>
+    handleEditPost: (variables: VariablesType) => Promise<any>,
+    handleDeletePost: (variables: VariableType) => Promise<void>
 }
 
 const initState: ProfileContext = {
@@ -28,6 +29,7 @@ const initState: ProfileContext = {
     setUserPosts: () => {},
     handleGetPosts: async () => {},
     handleEditPost: async () => {},
+    handleDeletePost: async () => {},
     title: "",
     content: "",
     setContent: () => {},
@@ -42,6 +44,10 @@ type VariablesType = {
     content: string
 }
 
+type VariableType = {
+    id: string | undefined
+}
+
 type ChildrenType = {
     children?: ReactElement | ReactElement[];
 };
@@ -54,8 +60,8 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
     const { setIsAuth, isAuth } = useLoginRegister()
     const navigate = useNavigate()
 
-    const handleDeletePost = async (id: number) => {
-        await axios.delete(`${BASE_URL}/delete/${id}`)
+    const handleDeletePost = async (variables: VariableType) => {
+        await axios.delete(`${BASE_URL}/delete/${variables.id}`)
         navigate("/")
     }
 
@@ -63,11 +69,10 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
         const title = variables.title
         const content = variables.content
 
-        const result = await axios.patch(`${BASE_URL}/updatepost/${variables.id}`, {
+        await axios.patch(`${BASE_URL}/updatepost/${variables.id}`, {
             title: title, 
             content: content
         })
-        console.log(result)
         navigate("/")
     }
 
@@ -112,7 +117,8 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
             setTitle,
             setContent,
             handleNewPost,
-            handleEditPost
+            handleEditPost,
+            handleDeletePost
         }}>
             {children}
         </ProfileContext.Provider>
