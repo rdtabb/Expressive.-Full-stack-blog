@@ -79,7 +79,7 @@ app.delete(`/delete/:id`, (req, res) => {
 
 
 // ...
-// updatepost PUT
+// updatepost PATCH
 app.patch(`/updatepost/:id`, (req, res) => {
   const id = req.params.id
   const title = req.body.title
@@ -88,6 +88,27 @@ app.patch(`/updatepost/:id`, (req, res) => {
   db.query(
     'UPDATE posts SET title = ?, content = ? WHERE post_id = ?',
     [title, content, id],
+    (err, result) => {
+      if (err) {
+        res.send({
+          err
+        })
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
+// ...
+// likepost PATCH
+app.patch('likepost/:id', (req, res) => {
+  const id = req.params.id
+  const likes = req.body.likes
+
+  db.query(
+    'UPDATE posts SET likes = ? WHERE post_id = ?',
+    [likes, id],
     (err, result) => {
       if (err) {
         res.send({
@@ -209,10 +230,11 @@ app.post("/addpost", (req, res) => {
   const title = req.body.title;
   const content = req.body.content;
   const id = req.session.user[0].user_id;
+  const initLikes = 0;
 
   db.query(
-    "INSERT INTO posts (user_id, title, content) VALUES (?, ?, ?)",
-    [id, title, content],
+    "INSERT INTO posts (user_id, title, content, likes) VALUES (?, ?, ?, ?)",
+    [id, title, content, initLikes],
     (err, result) => {
       if (err) {
         console.error(err);

@@ -11,6 +11,11 @@ import axios from "axios";
 import type { UserType, PostType } from "../types/Types";
 import { useNavigate } from "react-router-dom";
 
+type handleLikeVariablesType = {
+  likes: string,
+  id: number
+}
+
 type ProfileContext = {
   handleLogOut: () => Promise<void>;
   user: UserType;
@@ -24,6 +29,7 @@ type ProfileContext = {
   handleNewPost: () => Promise<void>;
   handleEditPost: (variables: VariablesType) => Promise<any>;
   handleDeletePost: (variables: VariableType) => Promise<void>;
+  handleLike: (variables: handleLikeVariablesType) => Promise<void>;
 };
 
 const initState: ProfileContext = {
@@ -39,6 +45,7 @@ const initState: ProfileContext = {
   content: "",
   setContent: () => {},
   setTitle: () => {},
+  handleLike: async () => {},
 };
 
 export const ProfileContext = createContext<ProfileContext>(initState);
@@ -95,6 +102,13 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
     navigate("/");
   };
 
+  const handleLike = async (variables: handleLikeVariablesType) => {
+    const likesNum: number = Number(variables.likes) + 1
+    await axios.patch(`${BASE_URL}/likepost/${variables.id}`, {
+      likes: likesNum
+    })
+  }
+
   const handleLogOut = async () => {
     await axios.delete(`${BASE_URL}/logout`);
     setIsAuth(false);
@@ -125,6 +139,7 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
         handleNewPost,
         handleEditPost,
         handleDeletePost,
+        handleLike
       }}
     >
       {children}

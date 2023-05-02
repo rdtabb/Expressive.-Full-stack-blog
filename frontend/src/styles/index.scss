@@ -408,6 +408,39 @@ body #root {
     background: rgba(255, 255, 255, 0.3);
   }
 
+  &__likes {
+    display: grid;
+    place-items: center;
+    text-align: center;
+    padding: .5rem;
+  }
+
+  &__like-button {
+    --width: 2rem;
+
+    display: grid;
+    place-items: center;
+    background: transparent;
+    width: var(--width);
+    border: none;
+
+    cursor: pointer;
+    transition: all var(--tr-func) var(--tr-time);
+
+    &:hover {
+      opacity: .6;
+    }
+  }
+
+  &__like-button--active {
+    animation: likeClick 1s linear ease;
+  }
+
+  &__body {
+    display: grid;
+    grid-template-columns: 1fr min-content;
+  }
+
   &__heading {
     display: flex;
     gap: 2rem;
@@ -431,6 +464,21 @@ body #root {
 @media (max-width: 40rem) {
   .item__heading {
     flex-direction: column;
+  }
+}
+
+@keyframes likeClick {
+  0% {
+    scale: .7;
+  }
+  25% {
+    scale: 1;
+  } 
+  50% {
+    scale: 1.2;
+  }  
+  100% {
+    scale: 1;
   }
 }
 
