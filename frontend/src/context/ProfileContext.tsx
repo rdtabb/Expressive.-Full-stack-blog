@@ -104,8 +104,9 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
 
   const handleLike = async (variables: handleLikeVariablesType) => {
     const likesNum: number = Number(variables.likes) + 1
+    const likesStr: string = String(likesNum)
     await axios.patch(`${BASE_URL}/likepost/${variables.id}`, {
-      likes: likesNum
+      likes: likesStr
     })
   }
 

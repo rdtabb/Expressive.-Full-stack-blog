@@ -102,7 +102,7 @@ app.patch(`/updatepost/:id`, (req, res) => {
 
 // ...
 // likepost PATCH
-app.patch('likepost/:id', (req, res) => {
+app.patch('/likepost/:id', (req, res) => {
   const id = req.params.id
   const likes = req.body.likes
 
