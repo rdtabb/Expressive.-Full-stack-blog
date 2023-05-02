@@ -41,7 +41,7 @@ const EditPost = () => {
           <input
             id="new-post__title"
             className="new-post__title"
-            placeholder="Set your title"
+            placeholder="Post title..."
             type="text"
             value={title}
             onChange={(e) => setTitle(e.target.value)}
@@ -52,7 +52,7 @@ const EditPost = () => {
           <textarea
             id="new-post__body"
             className="new-post__body edit-post__body"
-            placeholder="Text of your post"
+            placeholder="Post content..."
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />

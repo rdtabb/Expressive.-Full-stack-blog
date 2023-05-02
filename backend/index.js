@@ -225,7 +225,7 @@ app.post("/addpost", (req, res) => {
 
 // ...
 // getAllPosts GET
-app.post("/allposts", (req, res) => {
+app.get("/allposts", (req, res) => {
   db.query("SELECT * FROM posts", (err, result) => {
     if (err) {
       res.send({

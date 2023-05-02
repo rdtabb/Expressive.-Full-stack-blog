@@ -3,6 +3,7 @@ import ErrorBoundary from './components/ErrorBoundary/ErrorBoundary'
 import { ProfileContextProvider } from './context/ProfileContext'
 import LoginRegister from './components/LoginRegister/LoginRegister'
 import Profile from './components/Profile/Profile'
+import GeneralFeed from './components/GeneralFeed/GeneralFeed'
 import { Route, Routes } from 'react-router-dom'
 
 const App = () => {
@@ -18,9 +19,12 @@ const App = () => {
 
   return (
     <ProfileContextProvider>
-      <Routes>
-        <Route path='*' element={<Profile />}/>
-      </Routes>
+      <ErrorBoundary>
+        <Routes>
+          <Route path='*' element={<Profile />}/>
+          <Route path='/generalfeed' element={<GeneralFeed />}/>
+        </Routes>
+      </ErrorBoundary>
     </ProfileContextProvider>
   )
 }
