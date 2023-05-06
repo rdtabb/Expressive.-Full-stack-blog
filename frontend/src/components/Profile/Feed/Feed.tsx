@@ -11,17 +11,15 @@ const Feed = () => {
   const likeMutation = useMutation({
     mutationFn: handleLike,
     onSuccess: () => {
-      queryClient.invalidateQueries()
+      queryClient.invalidateQueries(["posts"])
     }
   })
   const postsQuery = useQuery({
     queryKey: ["posts"],
     queryFn: handleGetPosts,
   });
-  const posts = postsQuery.data;
 
   if (postsQuery.isLoading) return <LoadingPosts />;
-  if (postsQuery.isError) return <pre>{JSON.stringify(postsQuery.error)}</pre>;
 
   return (
     <section className="feed">
@@ -30,12 +28,11 @@ const Feed = () => {
           <li className="item" key={post.post_id}>
             <Link
               className="feed__link"
-              state={{ posts }}
               to={`/post/${post.post_id}`}
             >
               <div className="item__heading">
                 <h2 className="item__header">{post.title}</h2>
-                <p className="item__date">{post.created_at}</p>
+                <p className="item__date">{post.display_time}</p>
               </div>
             </Link>
             <div className="item__body">

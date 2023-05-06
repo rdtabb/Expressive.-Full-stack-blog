@@ -12,9 +12,9 @@ import type { UserType, PostType } from "../types/Types";
 import { useNavigate } from "react-router-dom";
 
 type handleLikeVariablesType = {
-  likes: string,
-  id: number
-}
+  likes: string;
+  id: number;
+};
 
 type ProfileContext = {
   handleLogOut: () => Promise<void>;
@@ -95,20 +95,30 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
   };
 
   const handleNewPost = async () => {
+    setTitle("")
+    setContent("")
+    const date = new Date();
+    const displayTime = new Intl.DateTimeFormat("en-US", {
+      weekday: "long",
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+    }).format(date);
     await axios.post(`${BASE_URL}/addpost`, {
       title,
       content,
+      displayTime
     });
     navigate("/");
   };
 
   const handleLike = async (variables: handleLikeVariablesType) => {
-    const likesNum: number = Number(variables.likes) + 1
-    const likesStr: string = String(likesNum)
+    const likesNum: number = Number(variables.likes) + 1;
+    const likesStr: string = String(likesNum);
     await axios.patch(`${BASE_URL}/likepost/${variables.id}`, {
-      likes: likesStr
-    })
-  }
+      likes: likesStr,
+    });
+  };
 
   const handleLogOut = async () => {
     await axios.delete(`${BASE_URL}/logout`);
@@ -140,7 +150,7 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
         handleNewPost,
         handleEditPost,
         handleDeletePost,
-        handleLike
+        handleLike,
       }}
     >
       {children}

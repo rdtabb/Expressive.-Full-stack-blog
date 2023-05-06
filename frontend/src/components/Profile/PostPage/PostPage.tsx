@@ -3,6 +3,7 @@ import { Link } from "react-router-dom";
 import type { PostType } from "../../../types/Types";
 import useProfileContext from "../../../hooks/useProfileContext";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import LoadingPost from "../../LoadingFillers/LoadingPost";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -21,7 +22,8 @@ const PostPage = () => {
     queryFn: handleGetPosts
   })
 
-  if (postsPageQuery.isLoading) return <p>Loading your post</p>
+  if (postsPageQuery.isLoading) return <LoadingPost />
+
   const post: PostType = postsPageQuery.data.find((item: PostType) => (
     (item.post_id).toString() === id
   ))

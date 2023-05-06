@@ -270,23 +270,6 @@ body #root {
     transition: all 150ms ease-in;
   }
 
-  &__link::before {
-    position: absolute;
-    content: '';
-    top: 1.5rem;
-    height: 3px;
-    width: 100%;
-    background-color: var(--clr-bright-accent);
-    ;
-    transform: scaleX(0);
-    transform-origin: left;
-    transition: all 150ms ease-in;
-  }
-
-  &__link:hover::before {
-    transform: scaleX(1);
-  }
-
   &__link:hover {
     color: var(--clr-bright-accent);
   }
@@ -410,9 +393,10 @@ body #root {
 
   &__likes {
     display: grid;
+    grid-template-rows: 1fr 1fr;
+    gap: .5rem;
     place-items: center;
     text-align: center;
-    padding: .5rem;
   }
 
   &__like-button {
@@ -543,7 +527,6 @@ body #root {
 /* ----------------------------- */
 
 .new-post {
-  margin-block: clamp(1rem, 5vw, 2rem);
 
   .title-label,
   .body-label {

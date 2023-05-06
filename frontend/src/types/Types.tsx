@@ -3,7 +3,8 @@ export type PostType = {
     title: string,
     content: string,
     created_at: string,
-    likes: string
+    likes: string,
+    display_time: string
 }
 
 export type UserType = {

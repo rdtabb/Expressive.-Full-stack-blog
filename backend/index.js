@@ -230,11 +230,12 @@ app.post("/addpost", (req, res) => {
   const title = req.body.title;
   const content = req.body.content;
   const id = req.session.user[0].user_id;
+  const displayTime = req.body.displayTime;
   const initLikes = 0;
 
   db.query(
-    "INSERT INTO posts (user_id, title, content, likes) VALUES (?, ?, ?, ?)",
-    [id, title, content, initLikes],
+    "INSERT INTO posts (user_id, title, display_time, content, likes) VALUES (?, ?, ?, ?, ?)",
+    [id, title, displayTime, content, initLikes],
     (err, result) => {
       if (err) {
         console.error(err);
