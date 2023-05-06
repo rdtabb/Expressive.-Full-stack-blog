@@ -103,6 +103,8 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
       year: "numeric",
       month: "long",
       day: "numeric",
+      hour: 'numeric',
+      minute: 'numeric'
     }).format(date);
     await axios.post(`${BASE_URL}/addpost`, {
       title,

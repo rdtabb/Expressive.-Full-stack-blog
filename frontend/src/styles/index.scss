@@ -5,6 +5,7 @@
 @import url(./reset.scss);
 // @import url(./variables/variables.scss);
 @import url(./selection-scroll/selsc.scss);
+
 :root {
   --clr-black: 0, 0%, 0%;
   --clr-white: 0, 0%, 100%;
@@ -339,15 +340,19 @@ body #root {
   0% {
     opacity: 1;
   }
+
   25% {
     opacity: .6;
   }
+
   50% {
     opacity: 1;
   }
+
   75% {
     opacity: .6;
   }
+
   100% {
     opacity: 1;
   }
@@ -455,12 +460,15 @@ body #root {
   0% {
     scale: .7;
   }
+
   25% {
     scale: 1;
-  } 
+  }
+
   50% {
     scale: 1.2;
-  }  
+  }
+
   100% {
     scale: 1;
   }
@@ -585,4 +593,14 @@ body #root {
     background: hsl(var(--clr-white));
     color: var(--clr-bright-accent);
   }
+}
+
+/* ----------------------------- */
+/* footer                        */
+/* ----------------------------- */
+
+.footer {
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(1.5rem);
+  padding: clamp(1rem, 3vw, 2rem) clamp(2rem, 7vw, 4rem);
 }
