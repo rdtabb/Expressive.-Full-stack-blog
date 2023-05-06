@@ -1,3 +1,5 @@
+import { ReactElement } from "react"
+
 export type PostType = {
     post_id: number,
     title: string,
@@ -22,4 +24,8 @@ export type CommentType = {
     created_at: string,
     creator_name: string,
     display_day: string
+}
+
+export type ChildrenType = {
+    children?: ReactElement | ReactElement[]
 }

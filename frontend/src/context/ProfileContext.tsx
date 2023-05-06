@@ -1,6 +1,5 @@
 import {
   createContext,
-  ReactElement,
   useEffect,
   useCallback,
   useState,
@@ -8,7 +7,7 @@ import {
 import useLoginRegister from "../hooks/useLoginRegister";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
-import type { UserType, PostType } from "../types/Types";
+import type { UserType, PostType, ChildrenType } from "../types/Types";
 import { useNavigate } from "react-router-dom";
 
 type handleLikeVariablesType = {
@@ -58,10 +57,6 @@ type VariablesType = {
 
 type VariableType = {
   id: string | undefined;
-};
-
-type ChildrenType = {
-  children?: ReactElement | ReactElement[];
 };
 
 export const ProfileContextProvider = ({ children }: ChildrenType) => {

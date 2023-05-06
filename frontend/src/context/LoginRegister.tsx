@@ -1,7 +1,8 @@
-import { createContext, ReactElement, useState, useEffect } from "react";
+import { createContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
+import type { ChildrenType } from "../types/Types";
 
 type LoginRegister = {
   isAuth: boolean;
@@ -34,10 +35,6 @@ const initState: LoginRegister = {
 };
 
 export const LoginRegisterContext = createContext<LoginRegister>(initState);
-
-type ChildrenType = {
-  children?: ReactElement | ReactElement[];
-};
 
 export const LoginRegisterProvider = ({ children }: ChildrenType) => {
   const [isAuth, setIsAuth] = useState<boolean>(false);

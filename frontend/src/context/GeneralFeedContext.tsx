@@ -1,6 +1,7 @@
-import { createContext, ReactElement } from "react";
+import { createContext } from "react";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
+import type { ChildrenType } from "../types/Types";
 
 type GeneralFeedContextType = {
   handleGetAllPosts: () => Promise<any>;
@@ -12,10 +13,6 @@ const initState: GeneralFeedContextType = {
 
 export const GeneralFeedContext =
   createContext<GeneralFeedContextType>(initState);
-
-type ChildrenType = {
-  children?: ReactElement | ReactElement[];
-};
 
 export const GeneralFeedContextProvider = ({ children }: ChildrenType) => {
   const handleGetAllPosts = async () => {

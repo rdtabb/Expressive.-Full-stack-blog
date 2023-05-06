@@ -4,9 +4,11 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import LoadingPosts from "../../LoadingFillers/LoadingPosts";
 import type { PostType } from "../../../types/Types";
 import useProfileContext from "../../../hooks/useProfileContext";
+import useCommentsContext from "../../../hooks/useCommentsContext";
 
 const Posts = () => {
   const { handleLike } = useProfileContext();
+  const { handleGetAllComments, handleGetDisplayComment } = useCommentsContext()
   const queryClient = useQueryClient();
 
   const handleGetAllPosts = async () => {
@@ -18,6 +20,11 @@ const Posts = () => {
     queryKey: ["generalposts"],
     queryFn: handleGetAllPosts,
   });
+
+  // const oneComment= useQuery({
+  //   queryKey: ["comment", post_id],
+  //   queryFn: () => handleGetDisplayComment(post_id)
+  // })
 
   const likeMutation = useMutation({
     mutationFn: handleLike,
