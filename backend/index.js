@@ -58,6 +58,46 @@ const db = mysql.createConnection({
 // ------------------------------------
 
 // ...
+// getDisplayComment GET
+app.get(`/post/${id}/comments/limited`, (req, res) => {
+  const id = req.params.id 
+
+  db.query(
+    'SELECT * FROM comments WHERE post_id = ? LIMIT 1',
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({
+          err
+        })
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
+// ...
+// getAllPostComments GET
+app.get(`/post/${id}/comments`, (req, res) => {
+  const id = req.params.id
+
+  db.query(
+    'SELECT * FROM comments WHERE post_id = ?',
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({
+          err
+        })
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
+// ...
 // deletepost DELETE
 app.delete(`/delete/:id`, (req, res) => {
   const id = req.params.id

@@ -2,7 +2,6 @@ export type PostType = {
     post_id: number,
     title: string,
     content: string,
-    created_at: string,
     likes: string,
     display_time: string
 }
@@ -15,4 +14,12 @@ export type UserType = {
 export type NewPostType = {
     title: string,
     content: string
+}
+
+export type CommentType = {
+    comment_id: number,
+    content: string,
+    created_at: string,
+    creator_name: string,
+    display_day: string
 }
