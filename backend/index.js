@@ -10,6 +10,7 @@ const saltrounds = 10;
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const session = require("express-session");
+const jwt = require("jsonwebtoken");
 
 // ------------------------------------
 // app config and middleware
@@ -33,7 +34,7 @@ app.use(
 app.use(
   session({
     key: "userId",
-    secret: 'secret',
+    secret: "secret",
     resave: false,
     saveUninitialized: false,
     cookie: {
@@ -54,42 +55,62 @@ const db = mysql.createConnection({
 });
 
 // ------------------------------------
+// Verify JWT
+// ------------------------------------
+
+function verifyJWT(req, res, next) {
+  const token = req.headers("x-access-token");
+  if (!token) {
+    res.send({
+      auth: false,
+      message: "Authentication token does not exist",
+    });
+  } else {
+    jwt.verify(token, "jwtsecret", (err, decoded) => {
+      if (err) {
+        res.send({
+          auth: false,
+          message: "Incorrect authentication token"
+        })
+      } else {
+        req.user_id = decoded.id
+        next()
+      }
+    })
+  }
+}
+
+// ------------------------------------
 // Endpoints
 // ------------------------------------
 
 // ...
-// getDisplayComment GET
-app.get(`/post/${id}/comments/limited`, (req, res) => {
-  const id = req.params.id 
+// getAllPostComments GET
+app.get(`/post/:id/comments`, (req, res) => {
+  const id = req.params.id;
 
-  db.query(
-    'SELECT * FROM comments WHERE post_id = ? LIMIT 1',
-    id,
-    (err, result) => {
-      if (err) {
-        res.send({
-          err
-        })
-      } else {
-        res.send(result)
-      }
+  db.query("SELECT * FROM comments WHERE post_id = ?", id, (err, result) => {
+    if (err) {
+      res.send({
+        err,
+      });
+    } else {
+      res.send(result);
     }
-  )
-})
+  });
+});
 
 // ...
-// getAllPostComments GET
-app.get(`/post/${id}/comments`, (req, res) => {
+// getSinglePost GET
+app.get(`/getPost/:id`, (req, res) => {
   const id = req.params.id
 
   db.query(
-    'SELECT * FROM comments WHERE post_id = ?',
+    'SELECT * FROM posts WHERE post_id = ?',
     id,
     (err, result) => {
       if (err) {
-        res.send({
-          err
-        })
+        res.semd({err})
       } else {
         res.send(result)
       }
@@ -100,81 +121,80 @@ app.get(`/post/${id}/comments`, (req, res) => {
 // ...
 // deletepost DELETE
 app.delete(`/delete/:id`, (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
 
-  db.query(
-    'DELETE FROM posts WHERE post_id = ?',
-    id,
-    (err, result) => {
-      if (err) {
-        res.send({
-          err
-        })
-      } else {
-        res.send(result)
-      }
+  db.query("DELETE FROM posts WHERE post_id = ?", id, (err, result) => {
+    if (err) {
+      res.send({
+        err,
+      });
+    } else {
+      res.send(result);
     }
-  )
-})
-
+  });
+});
 
 // ...
 // updatepost PATCH
 app.patch(`/updatepost/:id`, (req, res) => {
-  const id = req.params.id
-  const title = req.body.title
-  const content = req.body.content
+  const id = req.params.id;
+  const title = req.body.title;
+  const content = req.body.content;
 
   db.query(
-    'UPDATE posts SET title = ?, content = ? WHERE post_id = ?',
+    "UPDATE posts SET title = ?, content = ? WHERE post_id = ?",
     [title, content, id],
     (err, result) => {
       if (err) {
         res.send({
-          err
-        })
+          err,
+        });
       } else {
-        res.send(result)
+        res.send(result);
       }
     }
-  )
-})
+  );
+});
 
 // ...
 // likepost PATCH
-app.patch('/likepost/:id', (req, res) => {
-  const id = req.params.id
-  const likes = req.body.likes
+app.patch("/likepost/:id", (req, res) => {
+  const id = req.params.id;
+  const likes = req.body.likes;
 
   db.query(
-    'UPDATE posts SET likes = ? WHERE post_id = ?',
+    "UPDATE posts SET likes = ? WHERE post_id = ?",
     [likes, id],
     (err, result) => {
       if (err) {
         res.send({
-          err
-        })
+          err,
+        });
       } else {
-        res.send(result)
+        res.send(result);
       }
     }
-  )
-})
+  );
+});
 
 // ...
 // getposts GET
 app.get("/userposts", (req, res) => {
   const id = req.session.user[0].user_id;
 
-  db.query("SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC;", id, (err, result) => {
-    if (err) {
-      res.send({
-        error: err,
-      });
-    } else {
-      res.send(result);
+  db.query(
+    "SELECT * FROM posts WHERE user_id = ? ORDER BY created_at DESC;",
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({
+          error: err,
+        });
+      } else {
+        res.send(result);
+      }
     }
-  });
+  );
 });
 
 // ...
@@ -216,6 +236,42 @@ app.post("/register", (req, res) => {
         }
       }
     );
+  });
+});
+
+// ...
+// addpost POST
+app.post("/addpost", (req, res) => {
+  const title = req.body.title;
+  const content = req.body.content;
+  const id = req.session.user[0].user_id;
+  const displayTime = req.body.displayTime;
+  const initLikes = 0;
+
+  db.query(
+    "INSERT INTO posts (user_id, title, display_time, content, likes) VALUES (?, ?, ?, ?, ?)",
+    [id, title, displayTime, content, initLikes],
+    (err, result) => {
+      if (err) {
+        console.error(err);
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
+// ...
+// getAllPosts GET
+app.get("/allposts", (req, res) => {
+  db.query("SELECT * FROM posts ORDER BY created_at DESC", (err, result) => {
+    if (err) {
+      res.send({
+        err,
+      });
+    } else {
+      res.send(result);
+    }
   });
 });
 
@@ -263,43 +319,6 @@ app.get("/login", (req, res) => {
     });
   }
 });
-
-// ...
-// addpost POST
-app.post("/addpost", (req, res) => {
-  const title = req.body.title;
-  const content = req.body.content;
-  const id = req.session.user[0].user_id;
-  const displayTime = req.body.displayTime;
-  const initLikes = 0;
-
-  db.query(
-    "INSERT INTO posts (user_id, title, display_time, content, likes) VALUES (?, ?, ?, ?, ?)",
-    [id, title, displayTime, content, initLikes],
-    (err, result) => {
-      if (err) {
-        console.error(err);
-      } else {
-        res.send(result);
-      }
-    }
-  );
-});
-
-// ...
-// getAllPosts GET
-app.get("/allposts", (req, res) => {
-  db.query("SELECT * FROM posts", (err, result) => {
-    if (err) {
-      res.send({
-        err,
-      });
-    } else {
-      res.send(result);
-    }
-  });
-});
-
 // ------------------------------------
 // Listen
 // ------------------------------------
