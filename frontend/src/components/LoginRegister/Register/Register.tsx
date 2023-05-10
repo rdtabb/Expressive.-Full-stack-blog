@@ -1,4 +1,4 @@
-import useLoginRegister from "../../../hooks/useLoginRegister"
+import useLoginRegister from "../../../hooks/useContextHooks/useLoginRegister"
 import { Link } from "react-router-dom"
 
 const Register = () => {

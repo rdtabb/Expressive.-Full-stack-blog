@@ -1,7 +1,7 @@
 import { useParams } from "react-router-dom";
 import { Link } from "react-router-dom";
 import type { PostType } from "../../../types/Types";
-import useProfileContext from "../../../hooks/useProfileContext";
+import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import LoadingPost from "../../LoadingFillers/LoadingPost";
 

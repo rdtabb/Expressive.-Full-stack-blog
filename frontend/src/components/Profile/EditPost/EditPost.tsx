@@ -1,7 +1,7 @@
 import { useParams, useLocation } from "react-router-dom";
 import type { PostType } from "../../../types/Types";
 import { useEffect, useState } from "react";
-import useProfileContext from "../../../hooks/useProfileContext";
+import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 type StateType = {

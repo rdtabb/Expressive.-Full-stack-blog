@@ -1,4 +1,4 @@
-import useProfileContext from "../../../hooks/useProfileContext";
+import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 import type { PostType } from "../../../types/Types";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import LoadingPosts from "../../LoadingFillers/LoadingPosts";

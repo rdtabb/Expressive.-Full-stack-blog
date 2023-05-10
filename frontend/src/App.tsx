@@ -1,4 +1,4 @@
-import useLoginRegister from "./hooks/useLoginRegister";
+import useLoginRegister from "./hooks/useContextHooks/useLoginRegister";
 import ErrorBoundary from "./components/ErrorBoundary/ErrorBoundary";
 import { ProfileContextProvider } from "./context/ProfileContext";
 import LoginRegister from "./components/LoginRegister/LoginRegister";
@@ -23,7 +23,7 @@ const App = () => {
       <CommentsContextProvider>
         <ErrorBoundary>
           <Routes>
-            <Route path="*" element={<Profile />} />
+            <Route path="/*" element={<Profile />} />
             <Route path="/generalfeed/*" element={<GeneralFeed />} />
           </Routes>
         </ErrorBoundary>

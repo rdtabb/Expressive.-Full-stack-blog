@@ -1,4 +1,4 @@
-import useProfileContext from "../../../hooks/useProfileContext";
+import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 
 const NewPost = () => {

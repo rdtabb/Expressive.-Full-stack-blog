@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import useCommentsContext from "./useCommentsContext";
+import useCommentsContext from "../../useContextHooks/useCommentsContext";
 
 const useDisplayComments = (post_id: string | undefined) => {
     const { handleGetAllComments } = useCommentsContext()

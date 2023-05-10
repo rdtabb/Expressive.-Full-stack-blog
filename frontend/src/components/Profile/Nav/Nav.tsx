@@ -19,7 +19,7 @@ const Nav = () => {
             <Link className="nav__link" to="/post">New Post</Link>
           </li>
           <li className="list-item">
-            <Link className="nav__link" to="/generalfeed">General feed</Link>
+            <Link className="nav__link" to="/generalfeed/">General feed</Link>
           </li>
         </ul>
     </nav>

@@ -15,7 +15,7 @@ const GeneralFeed = () => {
         <ErrorBoundary>
           <Routes>
             <Route path="/" element={<Posts />} />
-            <Route path="/postpage/:id" element={<PostpageG />} />
+            <Route path="/:id" element={<PostpageG />} />
           </Routes>
         </ErrorBoundary>
       </div>

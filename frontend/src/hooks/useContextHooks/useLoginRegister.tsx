@@ -1,5 +1,5 @@
 import { useContext } from "react";
-import { LoginRegisterContext } from "../context/LoginRegister";
+import { LoginRegisterContext } from "../../context/LoginRegister";
 
 const useLoginRegister = () => {
     return useContext(LoginRegisterContext)

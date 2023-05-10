@@ -3,7 +3,7 @@ import { BASE_URL } from "../../../axios/axios";
 import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import LoadingPosts from "../../LoadingFillers/LoadingPosts";
 import type { PostType } from "../../../types/Types";
-import useProfileContext from "../../../hooks/useProfileContext";
+import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
 import { Link } from "react-router-dom";
 
@@ -41,7 +41,7 @@ const Posts = () => {
         <ul className="posts posts--general">
           {generalPosts.data.map((item: PostType) => (
             <li className="item item--general" key={item.post_id}>
-              <Link className="feed__link" to={`/postpage/${item.post_id}`}>
+              <Link className="feed__link" to={`/generalfeed/${item.post_id}`}>
                 <div className="item__heading">
                   <h2 className="item__header">{item.title}</h2>
                   <p className="item__date">{item.display_time}</p>

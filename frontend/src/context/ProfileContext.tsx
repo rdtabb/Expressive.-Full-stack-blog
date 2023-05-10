@@ -4,7 +4,7 @@ import {
   useCallback,
   useState,
 } from "react";
-import useLoginRegister from "../hooks/useLoginRegister";
+import useLoginRegister from "../hooks/useContextHooks/useLoginRegister";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
 import type { UserType, PostType, ChildrenType } from "../types/Types";
