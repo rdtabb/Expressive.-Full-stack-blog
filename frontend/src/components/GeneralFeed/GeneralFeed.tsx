@@ -5,6 +5,7 @@ import Nav from "../Profile/Nav/Nav";
 import Footer from "../Profile/Footer/Footer";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import PostpageG from "./PostpageG/PostpageG";
+import { GeneralFeedContextProvider } from "../../context/GeneralFeedContext";
 
 const GeneralFeed = () => {
   return (
@@ -12,12 +13,14 @@ const GeneralFeed = () => {
       <div className="container">
         <Header />
         <Nav />
-        <ErrorBoundary>
-          <Routes>
-            <Route path="/" element={<Posts />} />
-            <Route path="/:id" element={<PostpageG />} />
-          </Routes>
-        </ErrorBoundary>
+        <GeneralFeedContextProvider>
+          <ErrorBoundary>
+            <Routes>
+              <Route path="/" element={<Posts />} />
+              <Route path="/:id" element={<PostpageG />} />
+            </Routes>
+          </ErrorBoundary>
+        </GeneralFeedContextProvider>
       </div>
       <Footer />
     </>

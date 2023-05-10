@@ -1,14 +1,17 @@
-import useGeneralFeedContext from "../../useContextHooks/useGeneralFeedContext";
 import { useQuery } from "@tanstack/react-query";
-import type { PostType } from "../../../types/Types";
+import axios from "axios";
+import { BASE_URL } from "../../../axios/axios";
 
 const useGetGivenComment = (post_id: string | undefined) => {
-    const { handleGetGivenPost } = useGeneralFeedContext();
+  const handleGetGivenPost = async (id: string | undefined) => {
+    const result = await axios.get(`${BASE_URL}/getPost/${id}`);
+    return result.data;
+  };
 
-    return useQuery<PostType>({
-        queryKey: ["post", post_id],
-        queryFn: () => handleGetGivenPost(post_id)
-    })
-}
+  return useQuery({
+    queryKey: ["post", post_id],
+    queryFn: () => handleGetGivenPost(post_id),
+  });
+};
 
 export default useGetGivenComment;
