@@ -2,26 +2,51 @@ import { createContext } from "react";
 import { ChildrenType } from "../types/Types";
 import axios from "axios";
 import { BASE_URL } from "../axios/axios";
+import { useState } from "react";
+
+type VariableType = {
+    id: string | undefined
+}
 
 type CommentsContextType = {
-    handleGetAllComments: (post_id: string | undefined) => Promise<any>,
+    handleSubmitComment: (variables: VariableType) => Promise<void>,
+    setContent: React.Dispatch<React.SetStateAction<string>>,
+    content: string
 };
 
 const initState: CommentsContextType = {
-    handleGetAllComments: async () => {},
+    handleSubmitComment: async () => {},
+    setContent: () => {},
+    content: "",
 };
 
 export const CommentsContext = createContext<CommentsContextType>(initState);
 
 export const CommentsContextProvider = ({ children }: ChildrenType) => {
-    const handleGetAllComments = async (post_id: string | undefined) => {
-        const { data } = await axios.get(`${BASE_URL}/post/${post_id}/comments`)
-        return data
+    const [content, setContent] = useState<string>("")
+
+    const handleSubmitComment = async (variables: VariableType) => {
+        const date = new Date();
+        const display_time = new Intl.DateTimeFormat("en-US", {
+            weekday: "long",
+            year: "numeric",
+            month: "long",
+            day: "numeric",
+            hour: 'numeric',
+            minute: 'numeric'
+          }).format(date);
+        await axios.post(`${BASE_URL}/post/${variables.id}/submitcomment`, {
+            content,
+            display_time
+        })
     }
+
 
     return (
         <CommentsContext.Provider value={{
-            handleGetAllComments
+            handleSubmitComment,
+            setContent,
+            content
         }}>
             {children}
         </CommentsContext.Provider>

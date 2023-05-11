@@ -3,8 +3,8 @@ import axios from "axios";
 import { BASE_URL } from "../../../axios/axios";
 
 const useGetGivenComment = (post_id: string | undefined) => {
-  const handleGetGivenPost = async (id: string | undefined) => {
-    const result = await axios.get(`${BASE_URL}/getPost/${id}`);
+  const handleGetGivenPost = async (post_id: string | undefined) => {
+    const result = await axios.get(`${BASE_URL}/getPost/${post_id}`);
     return result.data;
   };
 

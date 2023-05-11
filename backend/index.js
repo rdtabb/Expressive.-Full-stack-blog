@@ -70,19 +70,40 @@ function verifyJWT(req, res, next) {
       if (err) {
         res.send({
           auth: false,
-          message: "Incorrect authentication token"
-        })
+          message: "Incorrect authentication token",
+        });
       } else {
-        req.user_id = decoded.id
-        next()
+        req.user_id = decoded.id;
+        next();
       }
-    })
+    });
   }
 }
 
 // ------------------------------------
 // Endpoints
 // ------------------------------------
+
+// ...
+// postComment post
+app.post("/post/:id/submitcomment", (req, res) => {
+  const id = req.params.id;
+  const content = req.body.content;
+  const creator_name = req.session.user[0].name;
+  const display_time = req.body.display_time;
+
+  db.query(
+    "INSERT INTO comments (post_id, content, creator_name, display_time) VALUES (?, ?, ?, ?, ?);",
+    [id, content, creator_name, display_time],
+    (err, result) => {
+      if (err) {
+        res.send({ err });
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
 
 // ...
 // getAllPostComments GET
@@ -103,20 +124,16 @@ app.get(`/post/:id/comments`, (req, res) => {
 // ...
 // getSinglePost GET
 app.get(`/getPost/:id`, (req, res) => {
-  const id = req.params.id
+  const id = req.params.id;
 
-  db.query(
-    'SELECT * FROM posts WHERE post_id = ?',
-    id,
-    (err, result) => {
-      if (err) {
-        res.semd({err})
-      } else {
-        res.send(result)
-      }
+  db.query("SELECT * FROM posts WHERE post_id = ?;", id, (err, result) => {
+    if (err) {
+      res.send({ err });
+    } else {
+      res.send(result);
     }
-  )
-})
+  });
+});
 
 // ...
 // deletepost DELETE

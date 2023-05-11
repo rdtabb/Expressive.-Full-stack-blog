@@ -13,6 +13,8 @@ const Comments = ({ id }: PropsType) => {
       <ul className="comments-list">
         {commentData.isLoading ? (
           <p>Loading comments</p>
+        ) : commentData.data.length ? (
+          <p>Post has no comments</p>
         ) : (
           commentData.data.map((comment: CommentType) => (
             <li key={comment.comment_id}>
