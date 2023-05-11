@@ -11,7 +11,7 @@ const SubmitComment = ({ id }: SubmitProps) => {
   const commentMutation = useMutation({
     mutationFn: handleSubmitComment,
     onSuccess: () => {
-      queryClient.invalidateQueries(["comments"]);
+      queryClient.invalidateQueries(["comments", id]);
     },
   });
 
@@ -24,6 +24,7 @@ const SubmitComment = ({ id }: SubmitProps) => {
       <input
         className="submitComment__input"
         type="text"
+        placeholder="Type your comment"
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />

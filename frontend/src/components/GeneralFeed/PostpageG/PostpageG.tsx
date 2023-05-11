@@ -1,9 +1,9 @@
 import { useParams } from "react-router-dom";
-import useGetGivenComment from "../../../hooks/useQueryHooks/useGetPost/useGetGivenPost";
 import LoadingPost from "../../LoadingFillers/LoadingPost";
 import type { PostType } from "../../../types/Types";
 import ErrorBoundary from "../../ErrorBoundary/ErrorBoundary";
 import Comments from "./Comments/Comments";
+import SubmitComment from "./SubmitComment/SubmitComment";
 import useGetPost from "../../../hooks/useQueryHooks/useGetPost/useGetGivenPost";
 
 const PostpageG = () => {
@@ -41,6 +41,7 @@ const PostpageG = () => {
           </ErrorBoundary>
           <ErrorBoundary>
             <Comments id={String(post.post_id)} />
+            <SubmitComment id={String(post.post_id)} />
           </ErrorBoundary>
         </>
       ))}
