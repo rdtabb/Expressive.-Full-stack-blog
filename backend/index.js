@@ -89,11 +89,11 @@ function verifyJWT(req, res, next) {
 app.post("/post/:id/submitcomment", (req, res) => {
   const id = req.params.id;
   const content = req.body.content;
-  const creator_name = req.session.user[0].name;
+  const creator_name = req.session.user[0].username;
   const display_time = req.body.display_time;
 
   db.query(
-    "INSERT INTO comments (post_id, content, creator_name, display_time) VALUES (?, ?, ?, ?, ?);",
+    "INSERT INTO comments (post_id, content, creator_name, display_date) VALUES (?, ?, ?, ?);",
     [id, content, creator_name, display_time],
     (err, result) => {
       if (err) {
@@ -326,6 +326,7 @@ app.post("/login", (req, res) => {
 // userdata GET
 app.get("/login", (req, res) => {
   if (req.session.user) {
+    console.log(req.session.user)
     res.send({
       auth: true,
       user: req.session.user,

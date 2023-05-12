@@ -23,7 +23,7 @@ const PostpageG = () => {
       {postData.data.map((post: PostType) => (
         <>
           <ErrorBoundary>
-            <section className="item item--general">
+            <section key={post.post_id} className="item item--general">
               <div className="item__heading">
                 <h2 className="item__header">{post?.title}</h2>
                 <p className="item__date">{post?.display_time}</p>
