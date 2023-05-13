@@ -110,7 +110,7 @@ app.post("/post/:id/submitcomment", (req, res) => {
 app.get(`/post/:id/comments`, (req, res) => {
   const id = req.params.id;
 
-  db.query("SELECT * FROM comments WHERE post_id = ?", id, (err, result) => {
+  db.query("SELECT * FROM comments WHERE post_id = ? ORDER BY display_date ASC;", id, (err, result) => {
     if (err) {
       res.send({
         err,
@@ -140,7 +140,7 @@ app.get(`/getPost/:id`, (req, res) => {
 app.delete(`/delete/:id`, (req, res) => {
   const id = req.params.id;
 
-  db.query("DELETE FROM posts WHERE post_id = ?", id, (err, result) => {
+  db.query("DELETE FROM posts WHERE post_id = ?;", id, (err, result) => {
     if (err) {
       res.send({
         err,

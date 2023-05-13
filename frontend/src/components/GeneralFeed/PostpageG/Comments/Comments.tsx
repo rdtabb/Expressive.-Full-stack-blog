@@ -14,13 +14,15 @@ const Comments = ({ id }: PropsType) => {
 
   return (
     <section className="comments">
-      <ul className="comments-list">
+      <ul className="comlist comlist--general">
         {commentData.data.length ? (
           commentData.data.map((comment: CommentType) => (
-            <li key={comment.comment_id}>
-              <p>{comment.creator_name}</p>
-              <p>{comment.created_at}</p>
-              <p>{comment.content}</p>
+            <li className="comment" key={comment.comment_id}>
+              <div className="comment__infosec">
+                <p className="comment__creator">{comment.creator_name}</p>
+                <p className="comment__time">{comment.display_date}</p>
+              </div>
+              <p className="comment__body">{comment.content}</p>
             </li>
           ))
         ) : (

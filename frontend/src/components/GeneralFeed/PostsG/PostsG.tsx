@@ -64,6 +64,7 @@ const Posts = () => {
                   <p>{item.likes}</p>
                 </div>
               </div>
+              <p>Checkout post comments...</p>
             </li>
           ))}
         </ul>

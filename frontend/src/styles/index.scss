@@ -605,3 +605,49 @@ body #root {
   padding: clamp(1rem, 3vw, 2rem) clamp(2rem, 7vw, 4rem);
   margin-top: clamp(2rem, 7vw, 4rem);
 }
+
+/* ----------------------------- */
+/* comments section              */
+/* ----------------------------- */
+
+.new-post--comments {
+  display: grid;
+  gap: 1.25rem;
+  background-color: rgba(255, 255, 255, 0.04);
+  padding-block: clamp(1.5rem, 4vw, 3rem);;
+}
+
+.item--comments {
+  padding: 0 clamp(1.5rem, 4vw, 3rem) clamp(1.5rem, 4vw, 3rem);
+  background-color: transparent;
+}
+
+.comlist {
+  display: grid;
+  gap: 1rem;
+  height: 20vh;
+  overflow-y: scroll;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  padding-inline: clamp(1.5rem, 4vw, 3rem);
+}
+
+.submitComment {
+  padding-inline: clamp(1.5rem, 4vw, 3rem);
+}
+
+.comment {
+  display: grid;
+  gap: 1rem;
+
+  &__infosec {
+    display: flex;
+    gap: 2rem;
+  }
+
+  &__time {
+    color: var(--clr-bright-accent);
+  }
+}
+
+

@@ -11,7 +11,7 @@ const SubmitComment = ({ id }: SubmitProps) => {
   const commentMutation = useMutation({
     mutationFn: handleSubmitComment,
     onSuccess: () => {
-      queryClient.invalidateQueries(["comments"]);
+      queryClient.invalidateQueries(["comments", id ]);
     },
   });
 

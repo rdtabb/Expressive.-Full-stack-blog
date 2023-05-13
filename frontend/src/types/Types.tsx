@@ -23,7 +23,7 @@ export type CommentType = {
     content: string,
     created_at: string,
     creator_name: string,
-    display_day: string
+    display_date: string
 }
 
 export type ChildrenType = {
