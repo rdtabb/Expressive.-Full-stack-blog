@@ -1,9 +1,7 @@
 /* ----------------------------- */
 /* reset, selection, variables   */
 /* ----------------------------- */
-
 @import url(./reset.scss);
-// @import url(./variables/variables.scss);
 @import url(./selection-scroll/selsc.scss);
 
 :root {
@@ -379,6 +377,10 @@ body #root {
   &__link {
     text-decoration: none;
     color: inherit;
+
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
@@ -396,12 +398,14 @@ body #root {
     background: rgba(255, 255, 255, 0.3);
   }
 
-  &__likes {
+  &__body {
     display: grid;
-    grid-template-rows: 1fr 1fr;
-    gap: .5rem;
-    place-items: center;
-    text-align: center;
+    gap: 1rem;
+  }
+
+  &__likes {
+    display: flex;
+    gap: 1rem;
   }
 
   &__like-button {
@@ -425,10 +429,6 @@ body #root {
     animation: likeClick 1s linear ease;
   }
 
-  &__body {
-    display: grid;
-    grid-template-columns: 1fr min-content;
-  }
 
   &__heading {
     display: flex;
@@ -638,6 +638,7 @@ body #root {
 
 .comment {
   display: grid;
+  grid-template-rows: min-content min-content;
   gap: 1rem;
 
   &__infosec {

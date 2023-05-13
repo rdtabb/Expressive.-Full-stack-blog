@@ -41,15 +41,14 @@ const Posts = () => {
         <ul className="posts posts--general">
           {generalPosts.data.map((item: PostType) => (
             <li className="item item--general" key={item.post_id}>
-              <Link className="feed__link" to={`/generalfeed/${item.post_id}`}>
-                <div className="item__heading">
-                  <h2 className="item__header">{item.title}</h2>
-                  <p className="item__date">{item.display_time}</p>
-                </div>
-              </Link>
+              <div className="item__heading">
+                <h2 className="item__header">{item.title}</h2>
+                <p className="item__date">{item.display_time}</p>
+              </div>
               <div className="item__body">
                 <p>{item.content}</p>
                 <div className="item__likes">
+                  <p>{item.likes}</p>
                   <button
                     onClick={() =>
                       likeMutation.mutate({
@@ -61,10 +60,11 @@ const Posts = () => {
                   >
                     <img src="../../public/like-icon.svg" alt="like-icon" />
                   </button>
-                  <p>{item.likes}</p>
                 </div>
               </div>
-              <p>Checkout post comments...</p>
+              <Link className="feed__link" to={`/generalfeed/${item.post_id}`}>
+                Checkout post comments...
+              </Link>
             </li>
           ))}
         </ul>

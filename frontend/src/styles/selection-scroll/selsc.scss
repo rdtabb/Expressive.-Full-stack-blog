@@ -1,19 +1,19 @@
 ::selection {
-    color: hsl(var(--clr-white));
+  color: hsl(var(--clr-white));
+  background: var(--clr-bright-accent);
+}
+
+@media (min-width: 40rem) {
+  ::-webkit-scrollbar {
+    width: .5rem;
+  }
+
+  ::-webkit-scrollbar-track {
+    background: #0f0038;
+  }
+
+  ::-webkit-scrollbar-thumb {
     background: var(--clr-bright-accent);
+    border-radius: 100vmax;
   }
-  
-  @media (min-width: 40rem) {
-    ::-webkit-scrollbar {
-      width: .5rem;
-    }
-  
-    ::-webkit-scrollbar-track {
-      background: #0f0038;
-    }
-  
-    ::-webkit-scrollbar-thumb {
-      background: var(--clr-bright-accent);
-      border-radius: 100vmax;
-    }
-  }
+}

@@ -38,14 +38,10 @@ export const CommentsContextProvider = ({ children }: ChildrenType) => {
       hour: "numeric",
       minute: "numeric",
     }).format(date);
-    console.log('gotta be fine')
-    console.log(display_time)
-    axios.post(`${BASE_URL}/post/${variables.id}/submitcomment`, {
+    await axios.post(`${BASE_URL}/post/${variables.id}/submitcomment`, {
       content,
       display_time,
-    }).then((result) => {
-        console.log(result)
-    })
+    });
     setContent("");
   };
 
