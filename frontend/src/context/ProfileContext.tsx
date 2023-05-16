@@ -34,7 +34,7 @@ type ProfileContext = {
 const initState: ProfileContext = {
   handleLogOut: async () => {},
   handleNewPost: async () => {},
-  user: { username: null, user_id: null },
+  user: {username: null, user_id: null, status: null},
   userPosts: [],
   setUserPosts: () => {},
   handleGetPosts: async () => {},
@@ -60,7 +60,7 @@ type VariableType = {
 };
 
 export const ProfileContextProvider = ({ children }: ChildrenType) => {
-  const [user, setUser] = useState<UserType>({ username: null, user_id: null });
+  const [user, setUser] = useState<UserType>({username: null, user_id: null, status: null});
   const [userPosts, setUserPosts] = useState<PostType[]>([]);
   const [title, setTitle] = useState<string>("");
   const [content, setContent] = useState<string>("");

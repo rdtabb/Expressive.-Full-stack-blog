@@ -24,7 +24,7 @@ const SubmitComment = ({ id }: SubmitProps) => {
       <input
         className="submitComment__input"
         type="text"
-        placeholder="Type your comment"
+        placeholder="Leave comment..."
         value={content}
         onChange={(e) => setContent(e.target.value)}
       />

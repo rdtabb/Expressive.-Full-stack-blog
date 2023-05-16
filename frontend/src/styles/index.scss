@@ -377,7 +377,9 @@ body #root {
   &__link {
     text-decoration: none;
     color: inherit;
+  }
 
+  &__link--comments {
     &:hover {
       text-decoration: underline;
     }
@@ -622,6 +624,12 @@ body #root {
   background-color: transparent;
 }
 
+.item__creator {
+  font-size: var(--fs-400);
+  font-weight: var(--fw-400);
+  display: block;
+}
+
 .comlist {
   display: grid;
   gap: 1rem;
@@ -634,6 +642,25 @@ body #root {
 
 .submitComment {
   padding-inline: clamp(1.5rem, 4vw, 3rem);
+
+  &__input {
+    border: none;
+    border-bottom: 1px solid hsl(var(--clr-white));
+    padding: var(--padding) .2rem;
+    border-radius: 0;
+
+    &:hover {
+      border: none;
+      border-bottom: 1px solid hsl(var(--clr-white), .5);
+    }
+
+    &:focus, 
+    &:focus-visible {
+      border: none;
+      outline: none;
+      border-bottom: 1px solid hsl(337, 96%, 56%);
+    }
+  }
 }
 
 .comment {

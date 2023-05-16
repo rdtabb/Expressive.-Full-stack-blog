@@ -5,12 +5,14 @@ export type PostType = {
     title: string,
     content: string,
     likes: string,
-    display_time: string
+    display_time: string,
+    creator: string
 }
 
 export type UserType = {
     user_id: number | null,
-    username: string | null
+    username: string | null,
+    status: string | null
 }
 
 export type NewPostType = {

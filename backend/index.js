@@ -59,7 +59,7 @@ const db = mysql.createConnection({
 // ------------------------------------
 
 function verifyJWT(req, res, next) {
-  const token = req.headers("x-access-token");
+  const token = req.headers["x-access-token"];
   if (!token) {
     res.send({
       auth: false,
@@ -262,12 +262,13 @@ app.post("/addpost", (req, res) => {
   const title = req.body.title;
   const content = req.body.content;
   const id = req.session.user[0].user_id;
+  const creator_name = req.session.user[0].username;
   const displayTime = req.body.displayTime;
   const initLikes = 0;
 
   db.query(
-    "INSERT INTO posts (user_id, title, display_time, content, likes) VALUES (?, ?, ?, ?, ?)",
-    [id, title, displayTime, content, initLikes],
+    "INSERT INTO posts (user_id, title, display_time, content, likes, creator) VALUES (?, ?, ?, ?, ?, ?)",
+    [id, title, displayTime, content, initLikes, creator_name],
     (err, result) => {
       if (err) {
         console.error(err);
