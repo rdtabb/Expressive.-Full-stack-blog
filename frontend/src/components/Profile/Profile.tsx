@@ -7,6 +7,7 @@ import AddPost from "./AddPost/AddPost";
 import PostPage from "./PostPage/PostPage";
 import EditPost from "./EditPost/EditPost";
 import Footer from "./Footer/Footer";
+import LogoutConfirm from "./LogoutConfirm/LogoutConfirm";
 
 const Profile = () => {
   return (
@@ -24,6 +25,7 @@ const Profile = () => {
         </ErrorBoundary>
       </div>
       <Footer />
+      <LogoutConfirm />
     </>
   );
 };

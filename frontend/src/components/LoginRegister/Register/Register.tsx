@@ -89,7 +89,7 @@ const Register = () => {
             {showConPass ? "hide" : "show"}
           </button>
         </div>
-        <button type="submit">Register</button>
+          <button type="submit">Register</button>
       </form>
       <Link className="loginreg__redirect" to="/">
         Login if you have an account

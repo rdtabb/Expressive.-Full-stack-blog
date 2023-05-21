@@ -54,6 +54,7 @@ const EditPost = () => {
             className="new-post__body edit-post__body"
             placeholder="Post content..."
             value={content}
+            rows={10}
             onChange={(e) => setContent(e.target.value)}
           />
           <button 

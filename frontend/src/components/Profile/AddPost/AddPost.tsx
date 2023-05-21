@@ -38,6 +38,7 @@ const NewPost = () => {
             id="new-post__body"
             className="new-post__body"
             placeholder="Post content..."
+            rows={5}
             value={content}
             onChange={(e) => setContent(e.target.value)}
           />
