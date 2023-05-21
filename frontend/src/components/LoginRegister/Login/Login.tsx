@@ -1,39 +1,70 @@
-import useLoginRegister from "../../../hooks/useContextHooks/useLoginRegister"
-import { Link } from "react-router-dom"
+import useLoginRegister from "../../../hooks/useContextHooks/useLoginRegister";
+import { Link } from "react-router-dom";
+import { useState } from "react";
+import { z, ZodType } from "zod";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+export type LoginFormData = {
+  username: string;
+  password: string;
+};
 
 const Login = () => {
-    const { 
-        handleLogin, 
-        loginName,
-        setLoginName,
-        loginPass,
-        setLoginPass,
-    } = useLoginRegister()
+  const [showPass, setShowPass] = useState<boolean>(false);
+  const { handleLogin } = useLoginRegister();
 
-    return (
-        <section className="login">
-            <h2 className="login__heading">Login</h2>
-            <form onSubmit={(e) => e.preventDefault()} className="login__form">
-                <input
-                    placeholder="Enter username..."
-                    type="text"
-                    value={loginName}
-                    onChange={(e) => setLoginName(e.target.value)}
-                />
-                <input
-                    placeholder="Enter password..."
-                    type="password"
-                    value={loginPass}
-                    onChange={(e) => setLoginPass(e.target.value)}
-                />
-                <button
-                    type="button"
-                    onClick={handleLogin}
-                >Login</button>
-            </form>
-            <Link className="loginreg__redirect" to="/register">Register, if you are new user</Link>
-        </section>
-    )
-}
+  const registerFormSchema: ZodType<LoginFormData> = z.object({
+    username: z.string().min(2).max(30),
+    password: z.string().min(6).max(20),
+  });
 
-export default Login
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm<LoginFormData>({
+    resolver: zodResolver(registerFormSchema),
+  });
+
+  return (
+    <section className="login">
+      <h2 className="login__heading">Login</h2>
+      <form onSubmit={handleSubmit(handleLogin)} className="form">
+        <div className="form__inputcont">
+          <input
+            {...register("username")}
+            name="username"
+            id="username"
+            placeholder="Enter username..."
+            type="text"
+          />
+            {errors.username && <span className="form__error">{errors.username.message}</span>}
+        </div>
+        <div className="form__inputcont">
+          <input
+            {...register("password")}
+            name="password"
+            id="password"
+            placeholder="Enter password..."
+            type={showPass ? "text" : "password"}
+          />
+          {errors.password && <span className="form__error">{errors.password.message}</span>}
+          <button
+            type="button"
+            onClick={() => setShowPass((prev) => !prev)}
+            className="form__toggle "
+          >
+            {showPass ? "hide" : "show"}
+          </button>
+        </div>
+        <button type="submit">Login</button>
+      </form>
+      <Link className="loginreg__redirect" to="/register">
+        Register, if you are new user
+      </Link>
+    </section>
+  );
+};
+
+export default Login;
