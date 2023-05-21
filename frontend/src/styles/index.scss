@@ -84,6 +84,36 @@
   font-weight: var(--fw-600);
 }
 
+.reg {
+  &__inputcont {
+    position: relative;
+    margin-bottom: 1rem;
+  }
+
+  &__error {
+    position: absolute;
+    bottom: -1.2rem;
+    font-size: .7rem;
+    color: hsl(337, 96%, 56%);
+  }
+
+  &__toggle {
+    position: absolute;
+    top: .7rem;
+    right: .5rem;
+    background-color: transparent;
+    border: none;
+    font-size: .75rem;
+
+    &:hover {
+      border: none;
+      opacity: .5;
+    }
+  }
+
+
+}
+
 form {
   display: grid;
   gap: clamp(.5rem, 3vw, 1rem);
@@ -95,6 +125,7 @@ form {
     padding: var(--padding);
     border-radius: var(--rad-400);
     transition: all var(--tr-time) var(--tr-func);
+    width: 100%;
 
     &:hover {
       border: 1px solid hsl(var(--clr-white), .6);
@@ -246,13 +277,23 @@ body #root {
 
 .nav {
   display: flex;
+  gap: clamp(1rem, 5vw, 3rem);
   align-items: center;
   justify-content: space-between;
-  gap: clamp(1rem, 5vw, 3rem);
-  padding-block: clamp(.5rem, 3vw, 3rem);
+  background: rgba(255, 255, 255, 0.04);
+  backdrop-filter: blur(1.5rem);
+  border-radius: .4rem;
+
+  padding: clamp(.5rem, 3vw, 1rem);
+  margin-bottom: clamp(.5rem, 3vw, 3rem);
 
   form {
     flex-grow: 1;
+  }
+
+  &__info {
+    display: grid;
+    gap: .5rem;
   }
 
   &__list {
@@ -616,7 +657,8 @@ body #root {
   display: grid;
   gap: 1.25rem;
   background-color: rgba(255, 255, 255, 0.04);
-  padding-block: clamp(1.5rem, 4vw, 3rem);;
+  padding-block: clamp(1.5rem, 4vw, 3rem);
+  ;
 }
 
 .item--comments {
@@ -654,7 +696,7 @@ body #root {
       border-bottom: 1px solid hsl(var(--clr-white), .5);
     }
 
-    &:focus, 
+    &:focus,
     &:focus-visible {
       border: none;
       outline: none;
@@ -677,5 +719,3 @@ body #root {
     color: var(--clr-bright-accent);
   }
 }
-
-

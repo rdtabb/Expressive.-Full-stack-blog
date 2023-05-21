@@ -327,7 +327,6 @@ app.post("/login", (req, res) => {
 // userdata GET
 app.get("/login", (req, res) => {
   if (req.session.user) {
-    console.log(req.session.user)
     res.send({
       auth: true,
       user: req.session.user,

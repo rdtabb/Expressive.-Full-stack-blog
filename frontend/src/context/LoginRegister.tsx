@@ -3,12 +3,13 @@ import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../axios/axios";
 import axios from "axios";
 import type { ChildrenType } from "../types/Types";
+import { RegisterFormData } from "../components/LoginRegister/Register/Register";
 
 type LoginRegister = {
   isAuth: boolean;
   setIsAuth: React.Dispatch<React.SetStateAction<boolean>>;
   handleLogin: () => void;
-  handleRegister: () => Promise<void>,
+  handleRegister: (data: RegisterFormData) => Promise<void>,
   loginName: string,
   loginPass: string,
   regName: string,
@@ -46,15 +47,13 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
 
   const navigate = useNavigate()
 
-  const handleRegister = async () => {
-    axios.post(`${BASE_URL}/register`, {
-      nameReg: regName,
-      passwordReg: regPass,
+  const handleRegister = async (data: RegisterFormData) => {
+    await axios.post(`${BASE_URL}/register`, {
+      nameReg: data.username,
+      passwordReg: data.password,
     });
-    setRegName("");
-    setRegPass("");
 
-    navigate("/login")
+    navigate("/")
   };
 
   const handleLogin = () => {
