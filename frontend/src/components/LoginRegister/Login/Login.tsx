@@ -58,7 +58,7 @@ const Login = () => {
             {showPass ? "hide" : "show"}
           </button>
         </div>
-        <button type="submit">Login</button>
+        <button disabled={errors.password || errors.username ? true : false} type="submit">Login</button>
       </form>
       <Link className="loginreg__redirect" to="/register">
         Register, if you are new user
