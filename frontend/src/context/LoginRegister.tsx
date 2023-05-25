@@ -43,7 +43,6 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
         passwordLog: data.password,
       })
       .then((response) => {
-        console.log(response)
         if (response.data.auth == true) {
           setIsAuth(true);
           navigate("/");

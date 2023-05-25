@@ -39,7 +39,9 @@ const Login = () => {
             placeholder="Enter username..."
             type="text"
           />
-            {errors.username && <span className="form__error">{errors.username.message}</span>}
+          {errors.username && (
+            <span className="form__error">{errors.username.message}</span>
+          )}
         </div>
         <div className="form__inputcont">
           <input
@@ -49,7 +51,9 @@ const Login = () => {
             placeholder="Enter password..."
             type={showPass ? "text" : "password"}
           />
-          {errors.password && <span className="form__error">{errors.password.message}</span>}
+          {errors.password && (
+            <span className="form__error">{errors.password.message}</span>
+          )}
           <button
             type="button"
             onClick={() => setShowPass((prev) => !prev)}
@@ -58,7 +62,12 @@ const Login = () => {
             {showPass ? "hide" : "show"}
           </button>
         </div>
-        <button disabled={errors.password || errors.username ? true : false} type="submit">Login</button>
+        <button
+          disabled={errors.password || errors.username ? true : false}
+          type="submit"
+        >
+          Login
+        </button>
       </form>
       <Link className="loginreg__redirect" to="/register">
         Register, if you are new user

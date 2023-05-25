@@ -131,9 +131,6 @@ button:disabled {
     color: hsl(var(--clr-white));
   }
 }
-input:invalid {
-  border: 1px solid red !important;
-}
 
 form {
   display: grid;
@@ -312,10 +309,6 @@ body #root {
   padding: clamp(.5rem, 3vw, 1rem);
   margin-bottom: clamp(.5rem, 3vw, 3rem);
 
-  form {
-    flex-grow: 1;
-  }
-
   .logout {
     background-color: transparent;
     border: 1px solid hsl(var(--clr-white));
@@ -402,7 +395,8 @@ body #root {
     }
 
     &__list[aria-expanded="false"] {
-      transform: translateX(100%);
+      // DO NOT FORGET YOU CHANGED 100 to 120
+      transform: translateX(120%);
     }
   }
 }
