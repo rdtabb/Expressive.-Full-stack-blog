@@ -85,6 +85,27 @@ function verifyJWT(req, res, next) {
 // ------------------------------------
 
 // ...
+// updateData
+app.patch("/user/updateprofile", (req, res) => {
+  const id = req.session.user[0].user_id;
+  const username = req.body.username
+  const status = req.body.status
+
+  db.query(
+    'UPDATE users SET username = ?, status = ? WHERE user_id = ?',
+    [username, status, id],
+    (err, result) => {
+      if (err) {
+        res.send({err}) 
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
+
+// ...
 // postComment post
 app.post("/post/:id/submitcomment", (req, res) => {
   const id = req.params.id;

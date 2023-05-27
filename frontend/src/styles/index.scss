@@ -306,7 +306,6 @@ body #root {
   backdrop-filter: blur(1.5rem);
   border-radius: .4rem;
 
-  padding: clamp(.5rem, 3vw, 1rem);
   margin-bottom: clamp(.5rem, 3vw, 3rem);
 
   .logout {
@@ -327,12 +326,21 @@ body #root {
   &__info {
     display: grid;
     gap: .5rem;
+    padding: clamp(.5rem, 3vw, 1rem);
+    transition: all var(--tr-time) var(--tr-func);
+    cursor: pointer;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.04);
+      border-radius: var(--rad-300);
+    }
   }
 
   &__list {
     display: flex;
     justify-content: space-around;
     gap: 2rem;
+    padding: clamp(.5rem, 3vw, 1rem);
   }
 
   .list-item {

@@ -26,9 +26,10 @@ type ProfileContext = {
   setTitle: React.Dispatch<React.SetStateAction<string>>;
   setContent: React.Dispatch<React.SetStateAction<string>>;
   handleNewPost: () => Promise<void>;
-  handleEditPost: (variables: VariablesType) => Promise<any>;
-  handleDeletePost: (variables: VariableType) => Promise<void>;
+  handleEditPost: (variables: HandleEditParamsType) => Promise<any>;
+  handleDeletePost: (variables: HandleDeleteParamsType) => Promise<void>;
   handleLike: (variables: handleLikeVariablesType) => Promise<void>;
+  handleEditProfile: (variables: HandleUpdateProfileParamsType) => Promise<void>
 };
 
 const initState: ProfileContext = {
@@ -45,19 +46,25 @@ const initState: ProfileContext = {
   setContent: () => {},
   setTitle: () => {},
   handleLike: async () => {},
+  handleEditProfile: async () => {},
 };
 
 export const ProfileContext = createContext<ProfileContext>(initState);
 
-type VariablesType = {
+type HandleEditParamsType = {
   id: string | undefined;
   title: string;
   content: string;
 };
 
-type VariableType = {
+type HandleDeleteParamsType = {
   id: string | undefined;
 };
+
+type HandleUpdateProfileParamsType = {
+  username: string,
+  status: string
+}
 
 export const ProfileContextProvider = ({ children }: ChildrenType) => {
   const [user, setUser] = useState<UserType>({username: null, user_id: null, status: null});
@@ -67,12 +74,19 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
   const { setIsAuth, isAuth } = useLoginRegister();
   const navigate = useNavigate();
 
-  const handleDeletePost = async (variables: VariableType) => {
+  const handleEditProfile = async (variables: HandleUpdateProfileParamsType) => {
+    await axios.patch(`${BASE_URL}/user/updateprofile`, {
+      username: variables.username,
+      status: variables.status
+    })
+  }
+
+  const handleDeletePost = async (variables: HandleDeleteParamsType) => {
     await axios.delete(`${BASE_URL}/delete/${variables.id}`);
     navigate("/");
   };
 
-  const handleEditPost = async (variables: VariablesType) => {
+  const handleEditPost = async (variables: HandleEditParamsType) => {
     const title = variables.title;
     const content = variables.content;
 
@@ -148,6 +162,7 @@ export const ProfileContextProvider = ({ children }: ChildrenType) => {
         handleEditPost,
         handleDeletePost,
         handleLike,
+        handleEditProfile
       }}
     >
       {children}
