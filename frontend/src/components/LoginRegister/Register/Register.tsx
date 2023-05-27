@@ -1,9 +1,9 @@
 import useLoginRegister from "../../../hooks/useContextHooks/useLoginRegister";
 import { Link } from "react-router-dom";
-import { ZodType, z } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useState } from "react";
+import { registerFormSchema } from "../../../zodSchemas/registerFormSchema/registerFormSchema";
 
 export type RegisterFormData = {
   username: string;
@@ -15,40 +15,6 @@ const Register = () => {
   const [showPass, setShowPass] = useState<boolean>(false);
   const [showConPass, setShowConPass] = useState<boolean>(false);
   const { handleRegister } = useLoginRegister();
-
-  const registerFormSchema: ZodType<RegisterFormData> = z
-    .object({
-      username: z
-        .string()
-        .trim()
-        .min(2, {
-          message: "Username must be at least 2 characters long",
-        })
-        .regex(/^[A-Za-z0-9]+$/, {
-          message: "Username can contain only letters and numbers",
-        })
-        .max(8, {
-          message: "Username must not be longer than 8 characters",
-        }),
-      password: z
-        .string()
-        .trim()
-        .min(6, {
-          message: "Password must contain at least 6 characters",
-        })
-        .max(20),
-      conpassword: z
-        .string()
-        .trim()
-        .min(6, {
-          message: "Password must contain at least 6 characters",
-        })
-        .max(20),
-    })
-    .refine((data) => data.password === data.conpassword, {
-      message: "Passwords do not match",
-      path: ["conpassword"],
-    });
 
   const {
     register,

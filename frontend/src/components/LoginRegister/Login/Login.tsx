@@ -1,9 +1,9 @@
 import useLoginRegister from "../../../hooks/useContextHooks/useLoginRegister";
 import { Link } from "react-router-dom";
 import { useState } from "react";
-import { z, ZodType } from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { loginFormSchema } from "../../../zodSchemas/loginFormSchema/loginFormSchema";
 
 export type LoginFormData = {
   username: string;
@@ -14,32 +14,12 @@ const Login = () => {
   const [showPass, setShowPass] = useState<boolean>(false);
   const { handleLogin } = useLoginRegister();
 
-  const registerFormSchema: ZodType<LoginFormData> = z.object({
-    username: z
-      .string()
-      .trim()
-      .min(2, { message: "Username must be at least 2 characters long" })
-      .regex(/^[A-Za-z0-9]+$/, {
-        message: "Username can contain only letters and numbers",
-      })
-      .max(8, {
-        message: "Username must not be longer than 8 characters",
-      }),
-    password: z
-      .string()
-      .trim()
-      .min(6, {
-        message: "Password must contain at least 6 characters",
-      })
-      .max(20),
-  });
-
   const {
     register,
     handleSubmit,
     formState: { errors },
   } = useForm<LoginFormData>({
-    resolver: zodResolver(registerFormSchema),
+    resolver: zodResolver(loginFormSchema),
   });
 
   return (
