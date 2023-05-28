@@ -154,10 +154,6 @@ form {
       border: 1px solid hsl(337, 96%, 56%);
       outline: none;
     }
-
-    &:invalid {
-      border: 1px solid red;
-    }
   }
 
   .input_type_error {
@@ -832,6 +828,16 @@ body #root {
 
     &:hover {
       opacity: .8;
+    }
+
+    &--edit:disabled {
+      &:hover {
+        border: 1px solid hsl(var(--clr-white));
+        background: transparent;
+        color: hsl(var(--clr-white));
+        opacity: .1;
+        cursor: initial;
+      }
     }
   }
 
