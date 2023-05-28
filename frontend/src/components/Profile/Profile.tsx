@@ -8,6 +8,7 @@ import PostPage from "./PostPage/PostPage";
 import EditPost from "./EditPost/EditPost";
 import Footer from "./Footer/Footer";
 import LogoutConfirm from "./LogoutConfirm/LogoutConfirm";
+import EditProfilePopup from "./EditProfilePopup/EditProfilePopup";
 
 const Profile = () => {
   return (
@@ -26,6 +27,7 @@ const Profile = () => {
       </div>
       <Footer />
       <LogoutConfirm />
+      <EditProfilePopup />
     </>
   );
 };

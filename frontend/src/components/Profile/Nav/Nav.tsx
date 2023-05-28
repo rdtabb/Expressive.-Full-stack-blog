@@ -1,7 +1,6 @@
 import { Link } from "react-router-dom";
 import useUserData from "../../../hooks/useQueryHooks/useUserData/useUserData";
 import { useUserDataType } from "../../../hooks/useQueryHooks/useUserData/useUserData";
-import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 
 const Nav = () => {
   const profileData: useUserDataType = useUserData();
@@ -10,9 +9,13 @@ const Nav = () => {
     document.querySelector('.popup--confirm')?.classList.add('popup--opened')
   }
 
+  const handleOpenEdit = () => {
+    document.querySelector('.popup--edit')?.classList.add('popup--opened')
+  }
+
   return (
     <nav className="nav">
-      <article className="nav__info">
+      <article onClick={handleOpenEdit} className="nav__info">
         {profileData.isLoading ? (
           <p>Loading...</p>
         ) : (

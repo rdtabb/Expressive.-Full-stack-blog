@@ -35,6 +35,7 @@ const Register = () => {
             type="text"
             name="username"
             id="username"
+            className={errors.username ? "input_type_error" : ""}
           />
           {errors.username && (
             <span className="form__error">{errors.username.message}</span>
@@ -47,6 +48,7 @@ const Register = () => {
             id="password"
             placeholder="Enter password..."
             type={showPass ? "text" : "password"}
+            className={errors.password ? "input_type_error" : ""}
           />
           {errors.password && (
             <span className="form__error">{errors.password.message}</span>
@@ -66,6 +68,7 @@ const Register = () => {
             name="conpassword"
             id="conpassword"
             type={showConPass ? "text" : "password"}
+            className={errors.conpassword ? "input_type_error" : ""}
           />
           {errors.conpassword && (
             <span className="form__error">{errors.conpassword.message}</span>

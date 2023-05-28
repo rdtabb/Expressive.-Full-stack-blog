@@ -160,6 +160,19 @@ form {
     }
   }
 
+  .input_type_error {
+    border: 1px solid red;
+
+    &:hover {
+      border: 1px solid red;
+    }
+
+    &:focus,
+    &:focus-visible {
+      border: 1px solid red;
+    }
+  }
+
   button {
     background-color: hsl(337, 96%, 56%);
     color: hsl(var(--clr-white));
@@ -768,7 +781,7 @@ body #root {
 }
 
 /* ----------------------------- */
-/* Popup styles                  */
+/* ∆ styles                  */
 /* ----------------------------- */
 
 .popup {
@@ -810,6 +823,7 @@ body #root {
     font-weight: var(--fw-600);
     text-align: center;
     line-height: 22px;
+    width: 100%;
 
     padding: 12px 0 16px;
 
@@ -827,7 +841,7 @@ body #root {
     line-height: 29px;
     color: hsl(var(--clr-white));
 
-    margin: 0 0 54px;
+    margin: 0 0 25px;
 
     &--confirm {
       font-size: var(--fs-500);
@@ -842,9 +856,8 @@ body #root {
     position: relative;
     display: grid;
     isolation: isolate;
-    // background-color: hsl(var(--clr-white));
     background: hsl(var(--clr-white), 0.05);
-    backdrop-filter: blur(.5rem);
+    backdrop-filter: blur(1rem);
     color: hsl(var(--clr-black));
     border: none;
     border-radius: 10px;

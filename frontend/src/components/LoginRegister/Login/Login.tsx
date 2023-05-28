@@ -33,6 +33,7 @@ const Login = () => {
             id="username"
             placeholder="Enter username..."
             type="text"
+            className={errors.username ? "input_type_error" : "input"}
           />
           {errors.username && (
             <span className="form__error">{errors.username.message}</span>
@@ -45,6 +46,7 @@ const Login = () => {
             id="password"
             placeholder="Enter password..."
             type={showPass ? "text" : "password"}
+            className={errors.password ? "input_type_error" : "input"}
           />
           {errors.password && (
             <span className="form__error">{errors.password.message}</span>
