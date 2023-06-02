@@ -57,7 +57,6 @@ const EditProfilePopup = () => {
     }
   }
 
-
   return (
     <div className="popup popup--edit">
       <div className="popup__container">
