@@ -1,5 +1,6 @@
 import useDisplayComments from "../../../../hooks/useQueryHooks/useDisplayComment/useDisplayComments";
 import type { CommentType } from "../../../../types/Types";
+import SubmitComment from "../SubmitComment/SubmitComment";
 
 type PropsType = {
   id: string | undefined;

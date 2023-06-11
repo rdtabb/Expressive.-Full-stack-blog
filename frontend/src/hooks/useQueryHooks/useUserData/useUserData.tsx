@@ -5,8 +5,8 @@ import { useQuery } from "@tanstack/react-query";
 
 const useUserData = () => {
   const handleGetUserData = async () => {
-    const result = await axios.get(`${BASE_URL}/login`);
-    const userData: UserType = result.data.user[0];
+    const result = await axios.get(`${BASE_URL}/user`);
+    const userData: UserType = result.data[0];
     return userData;
   };
 

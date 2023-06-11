@@ -121,6 +121,7 @@
     }
   }
 }
+
 button:disabled {
   opacity: .1;
   cursor: initial;
@@ -472,6 +473,9 @@ body #root {
   gap: 1rem;
 
   &__link {
+    display: flex;
+    align-items: end;
+    padding-bottom: .3rem;
     text-decoration: none;
     color: inherit;
   }
@@ -491,10 +495,32 @@ body #root {
   backdrop-filter: blur(1.5rem);
   border-radius: .4rem;
 
+  &--ppage {
+    background: transparent;
+    backdrop-filter: none;
+  }
+
   &--empty {
     height: 14rem;
     width: 100%;
     background: rgba(255, 255, 255, 0.3);
+  }
+
+  &__edit {
+    --spacing: 1.2rem;
+    background: url('../../public/editPopupIcon.svg') no-repeat center;
+    background-size: contain;
+    background-color: transparent;
+    border: none;
+    width: var(--spacing);
+    aspect-ratio: 1;
+    opacity: .5;
+    transition: opacity 200ms ease-in;
+    cursor: pointer;
+
+    &:hover {
+      opacity: 1;
+    }
   }
 
   &__body {
@@ -531,7 +557,7 @@ body #root {
 
   &__heading {
     display: flex;
-    gap: 2rem;
+    gap: .5rem;
     text-align: start;
   }
 
@@ -539,9 +565,11 @@ body #root {
     font-size: var(--fs-600);
     font-weight: var(--fw-700);
     line-height: 102%;
+    width: fit-content;
   }
 
   &__date {
+    margin-left: 1.5rem;
     letter-spacing: .2rem;
     color: var(--clr-bright-accent);
     display: flex;
@@ -640,6 +668,13 @@ body #root {
     font-size: var(--fs-500);
   }
 
+  &--ppage {
+    background: rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(1.5rem);
+    padding-bottom: clamp(1.5rem, 4vw, 3rem);
+    border-radius: .4rem;
+  }
+
   &__form {
     display: grid;
     gap: 1rem;
@@ -714,7 +749,7 @@ body #root {
   gap: 1.25rem;
   background-color: rgba(255, 255, 255, 0.04);
   padding-block: clamp(1.5rem, 4vw, 3rem);
-  ;
+  border-radius: .4rem;
 }
 
 .item--comments {

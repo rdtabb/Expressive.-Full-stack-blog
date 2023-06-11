@@ -359,6 +359,22 @@ app.get("/login", (req, res) => {
   }
 });
 
+app.get("/user", (req, res) => {
+  const id = req.session.user[0].user_id;
+
+  db.query(
+    'SELECT * FROM users WHERE user_id = ?',
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({err})
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
 // ------------------------------------
 // Listen
 // ------------------------------------

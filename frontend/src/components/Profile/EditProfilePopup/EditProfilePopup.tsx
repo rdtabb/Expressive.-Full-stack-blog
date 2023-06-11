@@ -1,6 +1,5 @@
 import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
-import { useMutation } from "@tanstack/react-query";
-import { useQueryClient } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useState } from "react";
 
 const EditProfilePopup = () => {

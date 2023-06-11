@@ -24,17 +24,18 @@ const Feed = () => {
   return (
     <section className="feed">
       <ul className="posts">
-        {postsQuery.data.map((post: PostType) => (
+        {postsQuery.data.length ? (postsQuery.data.map((post: PostType) => (
           <li className="item" key={post.post_id}>
+              <div className="item__heading">
+                <h2 className="item__header">{post.title}</h2>
             <Link
               className="feed__link"
               to={`/post/${post.post_id}`}
             >
-              <div className="item__heading">
-                <h2 className="item__header">{post.title}</h2>
+                <button className="item__edit"></button>
+            </Link>
                 <p className="item__date">{post.display_time}</p>
               </div>
-            </Link>
             <div className="item__body">
               <p>{post.content}</p>
               <div className="item__likes">
@@ -51,7 +52,9 @@ const Feed = () => {
               </div>
             </div>
           </li>
-        ))}
+        ))) : (
+          <p>Oops, you have no posts!</p>
+        )}
       </ul>
     </section>
   );

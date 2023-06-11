@@ -1,10 +1,10 @@
-import { useParams } from "react-router-dom";
-import { Link } from "react-router-dom";
-import type { PostType, CommentType } from "../../../types/Types";
-import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
-import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import LoadingPost from "../../LoadingFillers/LoadingPost";
+import SubmitComment from "../../GeneralFeed/PostpageG/SubmitComment/SubmitComment";
+import { useParams, Link } from "react-router-dom";
+import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
+import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 import useDisplayComments from "../../../hooks/useQueryHooks/useDisplayComment/useDisplayComments";
+import type { PostType, CommentType } from "../../../types/Types";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -31,8 +31,8 @@ const PostPage = () => {
   );
 
   return (
-    <main className="new-post">
-      <li className="item" key={id}>
+    <main className="new-post new-post--ppage">
+      <li className="item item--ppage" key={id}>
         <div className="item__heading">
           <h2 className="item__header">{post?.title}</h2>
         </div>
@@ -49,10 +49,10 @@ const PostPage = () => {
           </button>
         </div>
       </li>
-      <section className="comments">
+      <section className="comments comments--ppage">
         <ul className="comlist">
-          {comments.data.length ? (
-            comments.data.map((comment: CommentType, index: number) => (
+          {comments.data?.length ? (
+            comments.data?.map((comment: CommentType, index: number) => (
               <li key={index} className="comment">
                 <div className="comment__infosec">
                   <p className="comment__creator">{comment.creator_name}</p>
@@ -65,6 +65,7 @@ const PostPage = () => {
             <p>Post has no comments</p>
           )}
         </ul>
+        <SubmitComment id={id} />
       </section>
     </main>
   );
