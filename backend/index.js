@@ -104,7 +104,6 @@ app.patch("/user/updateprofile", (req, res) => {
   )
 })
 
-
 // ...
 // postComment post
 app.post("/post/:id/submitcomment", (req, res) => {

@@ -770,6 +770,7 @@ body #root {
   overflow-y: scroll;
   scroll-behavior: smooth;
   scroll-snap-type: y mandatory;
+  position: relative;
   padding-inline: clamp(1.5rem, 4vw, 3rem);
 }
 
@@ -800,6 +801,40 @@ body #root {
   display: grid;
   grid-template-rows: min-content min-content;
   gap: 1rem;
+
+  &--empty {
+    height: 80px;
+    background-color: hsl(var(--clr-white), .05);
+    border-radius: .5rem;
+    backdrop-filter: blur(2rem);
+  }
+
+  &__emmes {
+    position: absolute;
+    margin: auto;
+    inset: 0;
+
+    display: grid;
+    place-items: center;
+    font-size: var(--fs-600);
+
+    &::before {
+      position: absolute;
+      content: "";
+      inset: 0;
+      background: linear-gradient(
+        hsl(var(--clr-black), 0),
+        hsl(var(--clr-black), 0.05),
+        hsl(var(--clr-black), 0.1),
+        hsl(var(--clr-black), 0.15),
+        hsl(var(--clr-black), .2),
+        hsl(var(--clr-black), 0.15),
+        hsl(var(--clr-black), 0.1),
+        hsl(var(--clr-black), 0.05),
+        hsl(var(--clr-black), 0)
+      );
+    }
+  }
 
   &__infosec {
     display: flex;
