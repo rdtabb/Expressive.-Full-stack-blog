@@ -500,6 +500,17 @@ body #root {
     backdrop-filter: none;
   }
 
+  &__header-link {
+    text-decoration: none;
+    color: inherit;
+    transition: all var(--tr-time) var(--tr-func);
+
+    &:hover {
+      opacity: .8;
+      cursor: pointer;
+    }
+  }
+
   &--empty {
     height: 14rem;
     width: 100%;

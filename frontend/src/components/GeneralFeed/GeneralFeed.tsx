@@ -5,6 +5,7 @@ import Nav from "../Profile/Nav/Nav";
 import Footer from "../Profile/Footer/Footer";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import PostpageG from "./PostpageG/PostpageG";
+import AnotherUser from "../AnotherUser/AnotherUser";
 import { GeneralFeedContextProvider } from "../../context/GeneralFeedContext";
 
 const GeneralFeed = () => {
@@ -18,6 +19,7 @@ const GeneralFeed = () => {
             <Routes>
               <Route path="/" element={<Posts />} />
               <Route path="/:id" element={<PostpageG />} />
+              <Route path="/user/:id" element={<AnotherUser />} />
             </Routes>
           </ErrorBoundary>
         </GeneralFeedContextProvider>

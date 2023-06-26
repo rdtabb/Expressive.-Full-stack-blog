@@ -12,8 +12,8 @@ const Posts = () => {
   const queryClient = useQueryClient();
 
   const handleGetAllPosts = async () => {
-    const result = await axios.get(`${BASE_URL}/allposts`);
-    return result.data;
+    const { data } = await axios.get(`${BASE_URL}/allposts`);
+    return data;
   };
 
   const generalPosts = useQuery({
@@ -42,7 +42,12 @@ const Posts = () => {
           {generalPosts.data.map((item: PostType) => (
             <li className="item item--general" key={item.post_id}>
               <div className="item__heading">
-                <h2 className="item__header">{item.title} <span className="item__creator">by {item.creator}</span></h2>
+                <Link className="item__header-link" to={`/user/${item.user_id}`}>
+                  <h2 className="item__header">
+                    {item.title}
+                    <span className="item__creator">by {item.creator}</span>
+                  </h2>
+                </Link>
                 <p className="item__date">{item.display_time}</p>
               </div>
               <div className="item__body">
@@ -62,7 +67,10 @@ const Posts = () => {
                   </button>
                 </div>
               </div>
-              <Link className="feed__link feed__link--comments" to={`/generalfeed/${item.post_id}`}>
+              <Link
+                className="feed__link feed__link--comments"
+                to={`/generalfeed/${item.post_id}`}
+              >
                 Checkout post comments...
               </Link>
             </li>

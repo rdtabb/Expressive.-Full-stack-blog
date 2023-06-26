@@ -6,7 +6,8 @@ export type PostType = {
     content: string,
     likes: string,
     display_time: string,
-    creator: string
+    creator: string,
+    user_id: string
 }
 
 export type UserType = {

@@ -1,6 +1,5 @@
 import useDisplayComments from "../../../../hooks/useQueryHooks/useDisplayComment/useDisplayComments";
 import type { CommentType } from "../../../../types/Types";
-import SubmitComment from "../SubmitComment/SubmitComment";
 import CommentsEmpty from "./CommentsEmpty";
 
 type PropsType = {
