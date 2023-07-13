@@ -9,11 +9,12 @@ import EditPost from "./EditPost/EditPost";
 import Footer from "./Footer/Footer";
 import LogoutConfirm from "./LogoutConfirm/LogoutConfirm";
 import EditProfilePopup from "./EditProfilePopup/EditProfilePopup";
+import Container from "../Container/Container";
 
 const Profile = () => {
   return (
     <>
-      <div className="container">
+      <Container>
         <Header />
         <Nav />
         <ErrorBoundary>
@@ -24,7 +25,7 @@ const Profile = () => {
             <Route path="/post/edit/:id" element={<EditPost />} />
           </Routes>
         </ErrorBoundary>
-      </div>
+      </Container>
       <Footer />
       <LogoutConfirm />
       <EditProfilePopup />

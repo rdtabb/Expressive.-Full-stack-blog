@@ -374,6 +374,22 @@ app.get("/user", (req, res) => {
   )
 })
 
+app.get('/auser/:id', (req, res) => {
+  const id = req.params.id
+
+  db.query(
+    'SELECT * FROM posts WHERE user_id = ?',
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({err})
+      } else {
+        res.send(result)
+      }
+    }
+  )
+})
+
 // ------------------------------------
 // Listen
 // ------------------------------------

@@ -6,12 +6,13 @@ import Footer from "../Profile/Footer/Footer";
 import ErrorBoundary from "../ErrorBoundary/ErrorBoundary";
 import PostpageG from "./PostpageG/PostpageG";
 import AnotherUser from "../AnotherUser/AnotherUser";
+import Container from "../Container/Container";
 import { GeneralFeedContextProvider } from "../../context/GeneralFeedContext";
 
 const GeneralFeed = () => {
   return (
     <>
-      <div className="container">
+      <Container>
         <Header />
         <Nav />
         <GeneralFeedContextProvider>
@@ -23,7 +24,7 @@ const GeneralFeed = () => {
             </Routes>
           </ErrorBoundary>
         </GeneralFeedContextProvider>
-      </div>
+      </Container>
       <Footer />
     </>
   );

@@ -5,6 +5,7 @@ import { useQuery, useMutation, useQueryClient } from "@tanstack/react-query";
 import useProfileContext from "../../../hooks/useContextHooks/useProfileContext";
 import useDisplayComments from "../../../hooks/useQueryHooks/useDisplayComment/useDisplayComments";
 import type { PostType, CommentType } from "../../../types/Types";
+import CommentsEmpty from "../../GeneralFeed/PostpageG/Comments/CommentsEmpty";
 
 const PostPage = () => {
   const { id } = useParams();
@@ -27,7 +28,7 @@ const PostPage = () => {
   if (postsPageQuery.isLoading) return <LoadingPost />;
 
   const post: PostType = postsPageQuery.data.find(
-    (item: PostType) => item.post_id.toString() === id
+    (item: PostType) => item.post_id.toString() === id,
   );
 
   return (
@@ -62,7 +63,7 @@ const PostPage = () => {
               </li>
             ))
           ) : (
-            <p>Post has no comments</p>
+            <CommentsEmpty />
           )}
         </ul>
         <SubmitComment id={id} />

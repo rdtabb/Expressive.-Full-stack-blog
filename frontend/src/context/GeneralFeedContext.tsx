@@ -5,7 +5,7 @@ import type { ChildrenType } from "../types/Types";
 
 type GeneralFeedContextType = {
   handleGetAllPosts: () => Promise<any>;
-  handleGetGivenPost: (id: string | undefined) => Promise<any>
+  handleGetGivenPost: (id: string | undefined) => Promise<any>;
 };
 
 const initState: GeneralFeedContextType = {
@@ -24,14 +24,14 @@ export const GeneralFeedContextProvider = ({ children }: ChildrenType) => {
 
   const handleGetGivenPost = async (id: string | undefined) => {
     const result = await axios.get(`${BASE_URL}/getPost/${id}`);
-    return result.data
-  }
+    return result.data;
+  };
 
   return (
     <GeneralFeedContext.Provider
       value={{
         handleGetAllPosts,
-        handleGetGivenPost
+        handleGetGivenPost,
       }}
     >
       {children}

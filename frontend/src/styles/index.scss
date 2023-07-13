@@ -11,7 +11,7 @@
   --clr-accent: 273, 100%, 22%;
   --clr-bright-accent: hsl(337, 96%, 56%);
 
-  --ff-primary: 'Montserrat', sans-serif;
+  --ff-primary: "Montserrat", sans-serif;
 
   --fw-400: 400;
   --fw-600: 600;
@@ -33,8 +33,8 @@
   --tr-func: ease-in;
 
   --padding: 1rem;
-  --rad-300: .25rem;
-  --rad-400: .5rem;
+  --rad-300: 0.25rem;
+  --rad-400: 0.5rem;
 }
 
 /* ----------------------------- */
@@ -51,7 +51,7 @@
   padding: clamp(1rem, 3vw, 2rem);
   place-self: center;
 
-  background-color: hsl(var(--clr-white), .05);
+  background-color: hsl(var(--clr-white), 0.05);
   backdrop-filter: blur(10rem);
   border-radius: var(--rad-400);
 
@@ -63,7 +63,7 @@
   &__redirect {
     text-decoration: none;
     color: inherit;
-    opacity: .6;
+    opacity: 0.6;
     transition: all var(--tr-time) var(--tr-func);
 
     &:hover {
@@ -93,26 +93,26 @@
   &__error {
     position: absolute;
     bottom: -1.2rem;
-    font-size: .7rem;
+    font-size: 0.7rem;
     color: hsl(337, 96%, 56%);
   }
 
   &__toggle {
     position: absolute;
-    top: .7rem;
-    right: .5rem;
+    top: 0.7rem;
+    right: 0.5rem;
     background-color: transparent;
     border: none;
-    font-size: .75rem;
+    font-size: 0.75rem;
 
     &:hover {
       border: none;
-      opacity: .5;
+      opacity: 0.5;
     }
   }
 
   &__submit {
-    opacity: .1;
+    opacity: 0.1;
 
     &:hover {
       background-color: hsl(337, 96%, 56%);
@@ -123,7 +123,7 @@
 }
 
 button:disabled {
-  opacity: .1;
+  opacity: 0.1;
   cursor: initial;
 
   &:hover {
@@ -135,7 +135,7 @@ button:disabled {
 
 form {
   display: grid;
-  gap: clamp(.5rem, 3vw, 1rem);
+  gap: clamp(0.5rem, 3vw, 1rem);
 
   input {
     background-color: transparent;
@@ -147,7 +147,7 @@ form {
     width: 100%;
 
     &:hover {
-      border: 1px solid hsl(var(--clr-white), .6);
+      border: 1px solid hsl(var(--clr-white), 0.6);
     }
 
     &:focus,
@@ -176,7 +176,7 @@ form {
     border: 1px solid hsl(337, 96%, 56%);
 
     width: min-content;
-    padding: .5rem 1rem;
+    padding: 0.5rem 1rem;
     border-radius: var(--rad-400);
 
     cursor: pointer;
@@ -210,7 +210,7 @@ body #root {
   color: hsl(var(--clr-white));
   min-height: 100vh;
   line-height: 1.6;
-  letter-spacing: .1rem;
+  letter-spacing: 0.1rem;
   animation: gradientBG 15s ease infinite;
 }
 
@@ -267,12 +267,14 @@ body #root {
 
   background: transparent;
   border: 0 solid var(--button-color, #000);
-  border-radius: .5rem;
+  border-radius: 0.5rem;
   overflow: hidden;
   cursor: pointer;
 
   .hamburger {
-    transition: translate 1s, rotate 1s;
+    transition:
+      translate 1s,
+      rotate 1s;
   }
 
   &[aria-expanded="true"] .hamburger {
@@ -314,16 +316,16 @@ body #root {
   justify-content: space-between;
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(1.5rem);
-  border-radius: .4rem;
+  border-radius: 0.4rem;
 
-  margin-bottom: clamp(.5rem, 3vw, 3rem);
+  margin-bottom: clamp(0.5rem, 3vw, 3rem);
 
   .logout {
     background-color: transparent;
     border: 1px solid hsl(var(--clr-white));
     border-radius: var(--rad-300);
     color: hsl(var(--clr-white));
-    padding: .25rem .75rem;
+    padding: 0.25rem 0.75rem;
     cursor: pointer;
     transition: all var(--tr-time) var(--tr-func);
 
@@ -335,8 +337,8 @@ body #root {
 
   &__info {
     display: grid;
-    gap: .5rem;
-    padding: clamp(.5rem, 3vw, 1rem);
+    gap: 0.5rem;
+    padding: clamp(0.5rem, 3vw, 1rem);
     transition: all var(--tr-time) var(--tr-func);
     cursor: pointer;
 
@@ -350,7 +352,7 @@ body #root {
     display: flex;
     justify-content: space-around;
     gap: 2rem;
-    padding: clamp(.5rem, 3vw, 1rem);
+    padding: clamp(0.5rem, 3vw, 1rem);
   }
 
   .list-item {
@@ -438,7 +440,7 @@ body #root {
   }
 
   25% {
-    opacity: .6;
+    opacity: 0.6;
   }
 
   50% {
@@ -446,7 +448,7 @@ body #root {
   }
 
   75% {
-    opacity: .6;
+    opacity: 0.6;
   }
 
   100% {
@@ -475,7 +477,7 @@ body #root {
   &__link {
     display: flex;
     align-items: end;
-    padding-bottom: .3rem;
+    padding-bottom: 0.3rem;
     text-decoration: none;
     color: inherit;
   }
@@ -493,7 +495,7 @@ body #root {
   padding: clamp(1.5rem, 4vw, 3rem);
   background: rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(1.5rem);
-  border-radius: .4rem;
+  border-radius: 0.4rem;
 
   &--ppage {
     background: transparent;
@@ -506,7 +508,7 @@ body #root {
     transition: all var(--tr-time) var(--tr-func);
 
     &:hover {
-      opacity: .8;
+      opacity: 0.8;
       cursor: pointer;
     }
   }
@@ -519,13 +521,13 @@ body #root {
 
   &__edit {
     --spacing: 1.2rem;
-    background: url('../../public/editPopupIcon.svg') no-repeat center;
+    background: url("../../public/editPopupIcon.svg") no-repeat center;
     background-size: contain;
     background-color: transparent;
     border: none;
     width: var(--spacing);
     aspect-ratio: 1;
-    opacity: .5;
+    opacity: 0.5;
     transition: opacity 200ms ease-in;
     cursor: pointer;
 
@@ -557,7 +559,7 @@ body #root {
     transition: all var(--tr-func) var(--tr-time);
 
     &:hover {
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 
@@ -565,10 +567,10 @@ body #root {
     animation: likeClick 1s linear ease;
   }
 
-
   &__heading {
     display: flex;
-    gap: .5rem;
+    justify-content: space-between;
+    gap: 0.5rem;
     text-align: start;
   }
 
@@ -580,8 +582,7 @@ body #root {
   }
 
   &__date {
-    margin-left: 1.5rem;
-    letter-spacing: .2rem;
+    letter-spacing: 0.2rem;
     color: var(--clr-bright-accent);
     display: flex;
     align-items: flex-end;
@@ -596,7 +597,7 @@ body #root {
 
 @keyframes likeClick {
   0% {
-    scale: .7;
+    scale: 0.7;
   }
 
   25% {
@@ -633,10 +634,10 @@ body #root {
 
 .post__delete {
   width: fit-content;
-  padding: .5rem 1.75rem;
+  padding: 0.5rem 1.75rem;
   background-color: var(--clr-bright-accent);
   color: hsl(var(--clr-white));
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border: 1px solid var(--clr-bright-accent);
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -649,10 +650,10 @@ body #root {
 
 .post__edit {
   width: fit-content;
-  padding: .5rem 1.75rem;
+  padding: 0.5rem 1.75rem;
   background-color: hsl(var(--clr-white));
   color: var(--clr-bright-accent);
-  border-radius: .25rem;
+  border-radius: 0.25rem;
   border: 1px solid var(--clr-bright-accent);
   cursor: pointer;
   transition: all 200ms ease-in;
@@ -673,7 +674,6 @@ body #root {
 /* ----------------------------- */
 
 .new-post {
-
   .title-label,
   .body-label {
     font-size: var(--fs-500);
@@ -683,7 +683,7 @@ body #root {
     background: rgba(255, 255, 255, 0.04);
     backdrop-filter: blur(1.5rem);
     padding-bottom: clamp(1.5rem, 4vw, 3rem);
-    border-radius: .4rem;
+    border-radius: 0.4rem;
   }
 
   &__form {
@@ -697,7 +697,7 @@ body #root {
     background-color: transparent;
     color: hsl(var(--clr-white));
     border: 1px solid var(--clr-bright-accent);
-    border-radius: .75rem;
+    border-radius: 0.75rem;
     transition: all var(--tr-time) var(--tr-func);
 
     &:focus,
@@ -707,9 +707,8 @@ body #root {
     }
 
     &:hover {
-      border: 1px solid hsl(var(--clr-white, .8));
+      border: 1px solid hsl(var(--clr-white, 0.8));
     }
-
   }
 
   &__heading {
@@ -720,12 +719,12 @@ body #root {
 
   &__submit {
     width: fit-content;
-    padding: .75rem 2rem;
+    padding: 0.75rem 2rem;
     margin-top: 1.3rem;
 
     background: var(--clr-bright-accent);
     border: 1.5px solid var(--clr-bright-accent);
-    border-radius: .75rem;
+    border-radius: 0.75rem;
 
     color: hsl(var(--clr-white));
     font-weight: var(--fw-600);
@@ -760,7 +759,7 @@ body #root {
   gap: 1.25rem;
   background-color: rgba(255, 255, 255, 0.04);
   padding-block: clamp(1.5rem, 4vw, 3rem);
-  border-radius: .4rem;
+  border-radius: 0.4rem;
 }
 
 .item--comments {
@@ -791,12 +790,12 @@ body #root {
   &__input {
     border: none;
     border-bottom: 1px solid hsl(var(--clr-white));
-    padding: var(--padding) .2rem;
+    padding: var(--padding) 0.2rem;
     border-radius: 0;
 
     &:hover {
       border: none;
-      border-bottom: 1px solid hsl(var(--clr-white), .5);
+      border-bottom: 1px solid hsl(var(--clr-white), 0.5);
     }
 
     &:focus,
@@ -815,8 +814,8 @@ body #root {
 
   &--empty {
     height: 80px;
-    background-color: hsl(var(--clr-white), .05);
-    border-radius: .5rem;
+    background-color: hsl(var(--clr-white), 0.05);
+    border-radius: 0.5rem;
     backdrop-filter: blur(2rem);
   }
 
@@ -838,7 +837,7 @@ body #root {
         hsl(var(--clr-black), 0.05),
         hsl(var(--clr-black), 0.1),
         hsl(var(--clr-black), 0.15),
-        hsl(var(--clr-black), .2),
+        hsl(var(--clr-black), 0.2),
         hsl(var(--clr-black), 0.15),
         hsl(var(--clr-black), 0.1),
         hsl(var(--clr-black), 0.05),
@@ -870,13 +869,15 @@ body #root {
   inset: 0;
 
   z-index: var(--z-300);
-  transition: visibility 0s 200ms, opacity 200ms linear;
+  transition:
+    visibility 0s 200ms,
+    opacity 200ms linear;
 
   &::before {
-    content: '';
+    content: "";
     position: absolute;
     inset: 0;
-    background: hsl(var(--clr-black), .5);
+    background: hsl(var(--clr-black), 0.5);
     z-index: var(--z-300);
 
     margin: 0;
@@ -888,7 +889,9 @@ body #root {
     display: grid;
     visibility: visible;
     opacity: 1;
-    transition: visibility 0s, opacity 250ms linear;
+    transition:
+      visibility 0s,
+      opacity 250ms linear;
   }
 
   &__submit {
@@ -908,7 +911,7 @@ body #root {
     cursor: pointer;
 
     &:hover {
-      opacity: .8;
+      opacity: 0.8;
     }
 
     &--edit:disabled {
@@ -916,7 +919,7 @@ body #root {
         border: 1px solid hsl(var(--clr-white));
         background: transparent;
         color: hsl(var(--clr-white));
-        opacity: .1;
+        opacity: 0.1;
         cursor: initial;
       }
     }
@@ -978,7 +981,7 @@ body #root {
     transition: opacity 200ms ease-in;
 
     &:hover {
-      opacity: .6;
+      opacity: 0.6;
     }
   }
 }
