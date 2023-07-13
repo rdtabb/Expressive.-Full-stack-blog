@@ -42,8 +42,11 @@ const Posts = () => {
           {generalPosts.data.map((item: PostType) => (
             <li className="item item--general" key={item.post_id}>
               <div className="item__heading">
-                <Link className="item__header-link" to={`/user/${item.user_id}`}>
-                  <h2 className="item__header">
+                <Link
+                  className="item__header-link"
+                  to={`/user/${item.user_id}`}
+                >
+                  <h2 id={item.user_id} className="item__header">
                     {item.title}
                     <span className="item__creator">by {item.creator}</span>
                   </h2>

@@ -81,6 +81,36 @@ function verifyJWT(req, res, next) {
 }
 
 // ------------------------------------
+// Another User Endpoints
+// ------------------------------------
+app.get("/auser/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query("SELECT * FROM posts WHERE user_id = ?", id, (err, result) => {
+    if (err) {
+      res.send({ err });
+    } else {
+      res.send(result);
+    }
+  });
+});
+
+app.get("/auserposts/:id", (req, res) => {
+  const id = req.params.id;
+
+  db.query(
+    "SELECT username, status FROM users WHERE user_id = ?",
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({ err });
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+// ------------------------------------
 // Endpoints
 // ------------------------------------
 
@@ -88,21 +118,21 @@ function verifyJWT(req, res, next) {
 // updateData
 app.patch("/user/updateprofile", (req, res) => {
   const id = req.session.user[0].user_id;
-  const username = req.body.username
-  const status = req.body.status
+  const username = req.body.username;
+  const status = req.body.status;
 
   db.query(
-    'UPDATE users SET username = ?, status = ? WHERE user_id = ?',
+    "UPDATE users SET username = ?, status = ? WHERE user_id = ?",
     [username, status, id],
     (err, result) => {
       if (err) {
-        res.send({err}) 
+        res.send({ err });
       } else {
-        res.send(result)
+        res.send(result);
       }
     }
-  )
-})
+  );
+});
 
 // ...
 // postComment post
@@ -130,15 +160,19 @@ app.post("/post/:id/submitcomment", (req, res) => {
 app.get(`/post/:id/comments`, (req, res) => {
   const id = req.params.id;
 
-  db.query("SELECT * FROM comments WHERE post_id = ? ORDER BY display_date ASC;", id, (err, result) => {
-    if (err) {
-      res.send({
-        err,
-      });
-    } else {
-      res.send(result);
+  db.query(
+    "SELECT * FROM comments WHERE post_id = ? ORDER BY display_date ASC;",
+    id,
+    (err, result) => {
+      if (err) {
+        res.send({
+          err,
+        });
+      } else {
+        res.send(result);
+      }
     }
-  });
+  );
 });
 
 // ...
@@ -323,6 +357,7 @@ app.post("/login", (req, res) => {
     if (err) {
       res.send({ err });
     }
+    console.log(result);
 
     if (result.length > 0) {
       crypt.compare(password, result[0].password, (err, resp) => {
@@ -361,18 +396,14 @@ app.get("/login", (req, res) => {
 app.get("/user", (req, res) => {
   const id = req.session.user[0].user_id;
 
-  db.query(
-    'SELECT * FROM users WHERE user_id = ?',
-    id,
-    (err, result) => {
-      if (err) {
-        res.send({err})
-      } else {
-        res.send(result)
-      }
+  db.query("SELECT * FROM users WHERE user_id = ?", id, (err, result) => {
+    if (err) {
+      res.send({ err });
+    } else {
+      res.send(result);
     }
-  )
-})
+  });
+});
 
 app.get('/auser/:id', (req, res) => {
   const id = req.params.id

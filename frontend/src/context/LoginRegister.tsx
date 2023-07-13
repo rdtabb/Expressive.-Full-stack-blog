@@ -37,6 +37,7 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
   };
 
   const handleLogin = (data: LoginFormData) => {
+    console.log(data);
     axios
       .post(`${BASE_URL}/login`, {
         usernameLog: data.username,
@@ -47,7 +48,7 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
           setIsAuth(true);
           navigate("/");
         } else if (response.data.message) {
-          alert(response.data.message)
+          alert(response.data.message);
         }
       });
   };
