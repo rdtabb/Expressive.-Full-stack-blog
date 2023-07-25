@@ -22,14 +22,14 @@ app.use(
     origin: ["http://localhost:5173"],
     methods: ["GET", "POST", "DELETE", "PUT", "PATCH"],
     credentials: true,
-  })
+  }),
 );
 app.use(express.json());
 app.use(cookieParser());
 app.use(
   bodyParser.urlencoded({
     extended: true,
-  })
+  }),
 );
 app.use(
   session({
@@ -40,7 +40,7 @@ app.use(
     cookie: {
       expires: 60 * 60 * 240 * 1000,
     },
-  })
+  }),
 );
 
 // ------------------------------------
@@ -107,7 +107,7 @@ app.get("/auserposts/:id", (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 // ------------------------------------
@@ -130,7 +130,7 @@ app.patch("/user/updateprofile", (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 
@@ -151,7 +151,7 @@ app.post("/post/:id/submitcomment", (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 
@@ -171,7 +171,7 @@ app.get(`/post/:id/comments`, (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 
@@ -223,7 +223,7 @@ app.patch(`/updatepost/:id`, (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 
@@ -244,7 +244,7 @@ app.patch("/likepost/:id", (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 
@@ -264,7 +264,7 @@ app.get("/userposts", (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 
@@ -305,7 +305,7 @@ app.post("/register", (req, res) => {
         } else {
           res.send(result);
         }
-      }
+      },
     );
   });
 });
@@ -329,7 +329,7 @@ app.post("/addpost", (req, res) => {
       } else {
         res.send(result);
       }
-    }
+    },
   );
 });
 
@@ -357,7 +357,6 @@ app.post("/login", (req, res) => {
     if (err) {
       res.send({ err });
     }
-    console.log(result);
 
     if (result.length > 0) {
       crypt.compare(password, result[0].password, (err, resp) => {
@@ -405,21 +404,17 @@ app.get("/user", (req, res) => {
   });
 });
 
-app.get('/auser/:id', (req, res) => {
-  const id = req.params.id
+app.get("/auser/:id", (req, res) => {
+  const id = req.params.id;
 
-  db.query(
-    'SELECT * FROM posts WHERE user_id = ?',
-    id,
-    (err, result) => {
-      if (err) {
-        res.send({err})
-      } else {
-        res.send(result)
-      }
+  db.query("SELECT * FROM posts WHERE user_id = ?", id, (err, result) => {
+    if (err) {
+      res.send({ err });
+    } else {
+      res.send(result);
     }
-  )
-})
+  });
+});
 
 // ------------------------------------
 // Listen

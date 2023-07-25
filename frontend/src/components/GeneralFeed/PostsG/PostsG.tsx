@@ -44,7 +44,7 @@ const Posts = () => {
               <div className="item__heading">
                 <Link
                   className="item__header-link"
-                  to={`/user/${item.user_id}`}
+                  to={`/generalfeed/${item.user_id}/user`}
                 >
                   <h2 id={item.user_id} className="item__header">
                     {item.title}

@@ -20,7 +20,7 @@ const GeneralFeed = () => {
             <Routes>
               <Route path="/" element={<Posts />} />
               <Route path="/:id" element={<PostpageG />} />
-              <Route path="/user/:id" element={<AnotherUser />} />
+              <Route path="/:id/user" element={<AnotherUser />} />
             </Routes>
           </ErrorBoundary>
         </GeneralFeedContextProvider>

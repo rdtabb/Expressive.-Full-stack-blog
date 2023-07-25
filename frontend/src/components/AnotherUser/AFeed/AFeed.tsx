@@ -9,19 +9,18 @@ type AFeedProps = {
 
 const AFeed = ({ posts, isLoading, isError }: AFeedProps) => {
   if (isLoading) {
-    return <LoadingPosts />
+    return <LoadingPosts />;
   }
-
 
   return (
     <>
       <section className="feed">
         <ul className="posts">
-         {posts.map((item: PostType) => (
+          {posts.map((item: PostType) => (
             <li className="item">
               <p>{item.content}</p>
             </li>
-         )} 
+          ))}
         </ul>
       </section>
     </>
