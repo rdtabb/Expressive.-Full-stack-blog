@@ -105,7 +105,7 @@ app.get("/auserposts/:id", (req, res) => {
       if (err) {
         res.send({ err });
       } else {
-        res.send(result);
+        res.send(result[0]);
       }
     },
   );

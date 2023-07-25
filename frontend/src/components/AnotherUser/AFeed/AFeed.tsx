@@ -12,12 +12,17 @@ const AFeed = ({ posts, isLoading, isError }: AFeedProps) => {
     return <LoadingPosts />;
   }
 
+  if (isError) {
+    console.log();
+  }
+
   return (
     <>
       <section className="feed">
         <ul className="posts">
-          {posts.map((item: PostType) => (
-            <li className="item">
+          {posts.map((item: PostType, index) => (
+            <li key={index} className="item">
+              <p>{item.creator}</p>
               <p>{item.content}</p>
             </li>
           ))}
