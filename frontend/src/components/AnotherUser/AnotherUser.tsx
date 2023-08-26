@@ -13,8 +13,6 @@ const AnotherUser = () => {
 
   if (userPostsQuery.isLoading) {
     console.log("Loading posts...");
-  } else if (userDataQuery.data) {
-    console.log(userDataQuery.data);
   } else if (userPostsQuery.isError) {
     console.log(userPostsQuery.error);
   }
@@ -23,14 +21,9 @@ const AnotherUser = () => {
       <AProfileData
         username={userDataQuery.data?.username}
         status={userDataQuery.data?.status}
-        isError={userDataQuery.isError}
         isLoading={userDataQuery.isLoading}
       />
-      <AFeed
-        isLoading={userPostsQuery.isLoading}
-        isError={userPostsQuery.isError}
-        posts={userPostsQuery.data}
-      />
+      <AFeed isLoading={userPostsQuery.isLoading} posts={userPostsQuery.data} />
     </>
   );
 };

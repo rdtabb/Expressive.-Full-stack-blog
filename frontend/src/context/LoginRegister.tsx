@@ -37,7 +37,6 @@ export const LoginRegisterProvider = ({ children }: ChildrenType) => {
   };
 
   const handleLogin = (data: LoginFormData) => {
-    console.log(data);
     axios
       .post(`${BASE_URL}/login`, {
         usernameLog: data.username,

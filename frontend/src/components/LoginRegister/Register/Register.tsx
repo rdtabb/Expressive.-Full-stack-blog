@@ -19,9 +19,10 @@ const Register = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerFormSchema),
+    mode: "onChange",
   });
 
   return (
@@ -81,14 +82,7 @@ const Register = () => {
             {showConPass ? "hide" : "show"}
           </button>
         </div>
-        <button
-          disabled={
-            errors.username || errors.password || errors.conpassword
-              ? true
-              : false
-          }
-          type="submit"
-        >
+        <button disabled={!isValid || isSubmitting} type="submit">
           Register
         </button>
       </form>

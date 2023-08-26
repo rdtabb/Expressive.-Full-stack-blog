@@ -4,16 +4,11 @@ import LoadingPosts from "../../LoadingFillers/LoadingPosts";
 type AFeedProps = {
   posts: PostType[];
   isLoading: boolean;
-  isError: boolean;
 };
 
-const AFeed = ({ posts, isLoading, isError }: AFeedProps) => {
+const AFeed = ({ posts, isLoading }: AFeedProps) => {
   if (isLoading) {
     return <LoadingPosts />;
-  }
-
-  if (isError) {
-    console.log();
   }
 
   return (

@@ -28,10 +28,12 @@ const Feed = () => {
           postsQuery.data.map((post: PostType) => (
             <li className="item" key={post.post_id}>
               <div className="item__heading">
-                <h2 className="item__header">{post.title}</h2>
-                <Link className="feed__link" to={`/post/${post.post_id}`}>
-                  <button className="item__edit"></button>
-                </Link>
+                <div style={{ display: "flex", gap: "1rem" }}>
+                  <h2 className="item__header">{post.title}</h2>
+                  <Link className="feed__link" to={`/post/${post.post_id}`}>
+                    <button className="item__edit"></button>
+                  </Link>
+                </div>
                 <p className="item__date">{post.display_time}</p>
               </div>
               <div className="item__body">

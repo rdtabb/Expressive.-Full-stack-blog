@@ -2,18 +2,29 @@ type PropsType = {
   username: string | undefined;
   status: string | undefined;
   isLoading: boolean;
-  isError: boolean;
 };
 
-const AProfileData = ({ username, status, isLoading, isError }: PropsType) => {
+const AProfileData = ({ username, status, isLoading }: PropsType) => {
   if (isLoading) {
     console.log("Loading userdata");
   }
   return (
-    <div>
-      <p>{username}</p>
-      <p>{status}</p>
-    </div>
+    <article>
+      <p
+        style={{
+          fontSize: "3.5rem",
+        }}
+      >
+        {username}
+      </p>
+      <p
+        style={{
+          fontSize: "1.5rem",
+        }}
+      >
+        {status}
+      </p>
+    </article>
   );
 };
 

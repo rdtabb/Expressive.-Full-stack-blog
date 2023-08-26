@@ -17,9 +17,10 @@ const Login = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors },
+    formState: { errors, isValid, isSubmitting },
   } = useForm<LoginFormData>({
     resolver: zodResolver(loginFormSchema),
+    mode: "onChange",
   });
 
   return (
@@ -59,10 +60,7 @@ const Login = () => {
             {showPass ? "hide" : "show"}
           </button>
         </div>
-        <button
-          disabled={errors.password || errors.username ? true : false}
-          type="submit"
-        >
+        <button disabled={!isValid || isSubmitting} type="submit">
           Login
         </button>
       </form>
